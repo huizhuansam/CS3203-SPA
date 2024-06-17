@@ -1,0 +1,65 @@
+1 - procedure.procName
+procedure p;
+Select p.procName such that Calls(p, _)
+first, second, third, fifth
+5000
+2 - call.procName
+stmt s1, s2; call c4;
+Select c4.procName
+second, third, fourth, fifth
+5000
+3 - variable.varName
+variable v1, v2, v3;
+Select v1.varName such that Modifies(3, v1)
+a
+5000
+4 - read.varName
+read read;
+Select read.varName such that Follows(11, read)
+second
+5000
+5 - print.varName
+if if; print pr1nt;
+Select pr1nt.varName such that Parent(if, pr1nt)
+bc, f1fth
+5000
+6 - constant.value
+constant c1,c2;
+Select c2.value
+1, 2, 4, 5, 6, 123, 456, 42
+5000
+7 - stmt.stmt# 
+stmt s1, s2;
+Select s2.stmt# such that Follows(s1, s2)
+2, 3, 4, 5, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21, 22, 24, 26, 28, 30
+5000
+8 - read.stmt#
+stmt s1, s2; read r3ad;
+Select r3ad.stmt# such that Follows(s1, r3ad)
+2, 12, 15, 22
+5000
+9 - print.stmt#
+stmt s1, s2; print p;
+Select p.stmt# such that Follows(p, s1)
+4, 23
+5000
+10 - call.stmt#
+stmt s1, s2; call c4;
+Select c4.stmt# such that Follows(c4, _)
+1, 10, 11, 29
+5000
+11 - while.stmt#
+stmt s1, s2; while whole;
+Select whole.stmt# such that Follows(_, whole)
+5
+5000
+12 - if.stmt# 
+if if; while w;
+Select if.stmt# such that Parent(if, w)
+6
+5000
+13 - assign.stmt#
+stmt s1, s2; assign ass, ass1;
+Select ass.stmt# such that Follows(ass, _)
+3, 17, 19, 20, 21, 25
+5000

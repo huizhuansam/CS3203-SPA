@@ -1,0 +1,45 @@
+1 - Select procedures
+procedure p;
+Select p
+test
+5000
+2 - Select statements
+stmt s;
+Select s
+1, 2, 3
+5000
+3 - Select reads
+read r;
+Select r
+1, 2, 3
+5000
+4 - Select prints
+print print;
+Select print
+none
+5000
+5 - Select assignments
+assign a;
+Select a
+none
+5000
+6 - Select whiles
+while w;
+Select w
+none
+5000
+7 - Select ifs
+if if;
+Select if
+none
+5000
+8 - Select variables
+variable v;
+Select v
+a, b, none
+5000
+9 - Select constants
+constant c;
+Select c
+none
+5000

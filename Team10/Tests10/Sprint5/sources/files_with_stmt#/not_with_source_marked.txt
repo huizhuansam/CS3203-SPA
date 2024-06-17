@@ -1,0 +1,64 @@
+stmt: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30
+assign : 2, 3, 6, 10, 12, 14, 15, 18, 21, 22, 23, 26, 27
+while : 9, 24
+if : 4, 7, 11, 16, 19, 20
+print: 5, 13, 30
+call: 17, 25
+read: 1, 8, 28, 29
+constant: 1, 8, 0, 45, 3, 4, 9, 81
+procedure: with, a, main
+variable: x, b, c, t, y, z, a, v, n, d, with, main
+call.proc = with, a
+
+procedure main {
+    read x;                                 #1
+    b = x + 1;                              #2
+    c = t - y + z * 8 / a;                  #3
+    if (t == c) then {                      #4
+        print t;                            #5
+    } else {
+        t = c * z + y;                      #6
+        if (t == v) then {                  #7
+            read with;                      #8
+            while (y > 0) {                 #9
+                y = n * 45 + t;             #10
+                if (t == x/45*y) then {     #11
+                    with = x * d;           #12
+                } else {
+                    print a;                #13
+                }
+            }
+        } else {
+            y = c;                          #14
+        }
+    }
+}
+
+procedure with {
+    x = b;                                  #15
+    if (b == x - (y - x) / 45%a) then {     #16
+        call main;                          #17
+        b = main * with;                    #18
+        if (a == b * c) then {              #19
+            if (v == c %3) then {           #20
+                with = a /b *4;             #21
+            } else {
+                main = c * 45;              #22
+            }
+        } else {
+            y = y *n /9;                    #23
+        }
+    } else {
+        while (x > 0) {                     #24
+            call a;                         #25
+            b = 81 * n;                     #26
+            x = x - n;                      #27
+        }
+    }
+}
+
+procedure a {
+    read b;                                 #28
+    read with;                              #29
+    print with;                              #30
+}

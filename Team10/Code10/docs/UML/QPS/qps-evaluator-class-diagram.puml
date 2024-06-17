@@ -1,0 +1,24 @@
+@startuml
+
+class Evaluator {
+  - std::list<std::string> TRUE_LIST
+  - std::list<std::string> FALSE_LIST
+  - std::list<std::string> EMPTY_LIST
+  + std::list<std::string> getResultList(ReadFacade& readFacade, const std::shared_ptr<Strategy>& selectStrategy, const std::vector<std::vector<std::shared_ptr<Strategy>>>& groups)
+  - std::list<std::string> evaluateBoolean(ReadFacade& readFacade, const std::vector<std::vector<std::shared_ptr<Strategy>>>& groups)
+  - std::list<std::string> evaluateValues(ReadFacade& readFacade, const std::shared_ptr<Strategy>& selectStrategy, const std::vector<std::vector<std::shared_ptr<Strategy>>>& groups)
+  - std::vector<Result> evaluateEachGroup(ReadFacade& readFacade, const std::vector<std::vector<std::shared_ptr<Strategy>>>& groups)
+  - Result evaluateValueStrategy(ReadFacade& readFacade, const std::shared_ptr<Strategy>& strategy, bool isFirst, Result groupResult)
+  - Result evaluateNotValueStrategy(ReadFacade& readFacade, const std::shared_ptr<Strategy>& strategy)
+  - std::vector<std::string> getSelectTargets(const std::shared_ptr<Strategy>& selectStrategy)
+  - std::vector<Result> filterGroupResultsByTargetSynonyms(std::vector<Result>& groupResults, std::vector<std::string>& targetSynonyms)
+  - void filterGroupResultByTargetSynonyms(Result& groupResult, std::vector<std::string>& targetSynonyms, Result& filteredGroupResult)
+  - Result mergeResults(std::vector<Result>& filteredGroupResults)
+  - std::vector<std::string> getSelectSynonyms(const std::shared_ptr<Strategy>& selectStrategy)
+  - std::vector<SynonymType> getSynonymTypes(const std::shared_ptr<Strategy>& selectStrategy)
+  - std::vector<AttrNameType> getAttrNameTypes(const std::shared_ptr<Strategy>& selectStrategy)
+  - Result selectResultWithConstraint(const std::vector<std::string>& selectTargets, const std::vector<std::string>& selectSynonyms,
+          const std::vector<SynonymType>& selectSynonymTypes, const std::vector<AttrNameType>& selectAttrNameTypes, Result& constraintResult, ReadFacade& readFacade)
+}
+
+@enduml

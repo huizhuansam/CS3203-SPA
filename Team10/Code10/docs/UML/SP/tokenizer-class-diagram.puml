@@ -1,0 +1,107 @@
+@startuml
+
+class Tokenizer {
+    + std::vector<std::unique_ptr<Token>> tokenize(std::string& programSource)
+}
+
+class Token {
+    - TokenType type
+    - std::string value
+
+    + Token(TokenType type, std::string value)
+    + TokenType getType()
+    + std::string getValue()
+    + bool canBeName()
+    + bool isStartOfStmt()
+}
+
+enum TokenType {
+      NAME
+      INTEGER
+      PROCEDURE
+      READ
+      PRINT
+      CALL
+      WHILE
+      IF
+      THEN
+      ELSE
+      SEMICOLON
+      OPEN_CURLY_BRACKET
+      CLOSE_CURLY_BRACKET
+      OPEN_BRACKET
+      CLOSE_BRACKET
+      GT
+      GTE
+      LT
+      LTE
+      EQ
+      NEQ
+      NOT
+      AND
+      OR
+      ASSIGN
+      PLUS
+      MINUS
+      MULTIPLY
+      DIVIDE
+      MODULO
+      WHITESPACE
+}
+
+class StringHandler {
+    + bool isWhitespace(char ch);
+
+    + bool isValidSymbol(char ch);
+
+    + bool isLetter(char ch);
+
+    + bool isDigit(char ch);
+
+    + bool hasNextChar(std::string::const_iterator& it, std::string::const_iterator& end);
+
+    + char getNextChar(std::string::const_iterator& it);
+
+    + VOID pointNextChar(std::string::const_iterator& it);
+
+    + bool hasPreviousChar(std::string::const_iterator& it, std::string::const_iterator& end);
+
+    + VOID pointPreviousChar(std::string::const_iterator& it);
+
+    + std::string formWordString(std::string::const_iterator& it, std::string::const_iterator& end);
+
+    + std::string formNumberString(std::string::const_iterator& it, std::string::const_iterator& end);
+}
+
+class TokenHandler {
+    + std::unique_ptr<TokenHandler> of(char character)
+    + std::unique_ptr<Token> handleToken(std::string::const_iterator& it, std::string::const_iterator& end)
+}
+
+class IntegerTokenHandler extends TokenHandler {
+    + std::unique_ptr<Token> handleToken(std::string::const_iterator& it, std::string::const_iterator& end)
+}
+
+class SymbolTokenHandler extends TokenHandler {
+    + std::unique_ptr<Token> handleToken(std::string::const_iterator& it, std::string::const_iterator& end)
+}
+
+class WordTokenHandler extends TokenHandler {
+    + std::unique_ptr<Token> handleToken(std::string::const_iterator& it, std::string::const_iterator& end)
+}
+
+class WhitespaceTokenHandler extends TokenHandler {
+    + std::unique_ptr<Token> handleToken(std::string::const_iterator& it, std::string::const_iterator& end)
+}
+
+Tokenizer <-down-> TokenHandler
+TokenHandler <-> StringHandler
+
+Token *-down- TokenType
+
+IntegerTokenHandler -- Token
+SymbolTokenHandler -- Token
+WordTokenHandler -- Token
+WhitespaceTokenHandler -- Token
+
+@enduml

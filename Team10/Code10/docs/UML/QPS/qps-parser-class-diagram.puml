@@ -1,0 +1,186 @@
+@startuml
+
+class Parser {
+  - std::unordered_map<std::string, SynonymType> declarationTypeMap
+  - std::unordered_map<std::string, std::function<void(std::vector<std::shared_ptr<Token>>::iterator&, std::vector<std::shared_ptr<Strategy>>&)>> parserMap
+  + std::vector<std::shared_ptr<Strategy>> parse(std::vector<std::shared_ptr<Token>>& query)
+  + SynonymType getDeclarationType(const std::string& synonym)
+  - void parseSelect(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end, const std::unordered_map<std::string, std::vector<std::shared_ptr<Strategy>>& strategies)
+  - void parseClauses(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end, const std::unordered_map<std::string, std::vector<std::shared_ptr<Strategy>>& strategies)
+  - void parseSuchThat( std::vector<std::shared_ptr<Token>>::iterator& it, std::vector<std::shared_ptr<Strategy>>& strategies)
+  - void parseModifies(std::vector<std::shared_ptr<Token>>::iterator& it, std::vector<std::shared_ptr<Strategy>>& strategies)
+  - void parseUses(std::vector<std::shared_ptr<Token>>::iterator& it, std::vector<std::shared_ptr<Strategy>>& strategies)
+  - bool isProcedure(std::vector<std::shared_ptr<Token>>::iterator& it)
+  - void parsePattern(std::vector<std::shared_ptr<Token>>::iterator& it, std::vector<std::shared_ptr<Strategy>>& strategies)
+  - void parseWith(std::vector<std::shared_ptr<Token>>::iterator& it, std::vector<std::shared_ptr<Strategy>>& strategies)
+  - bool isSameClauseType(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end)
+  - bool isNot(std::vector<std::shared_ptr<Token>>::iterator& it)
+}
+
+class SelectParser {
+  + std::shared_ptr<BooleanSelectStrategy> parseBooleanSelect(std::vector<std::shared_ptr<Token>>::iterator& it)
+  + std::shared_ptr<TupleSelectStrategy> parseTupleSelect(std::vector<std::shared_ptr<Token>>::iterator& it,
+        const std::vector<std::shared_ptr<Token>>::iterator& end, const std::unordered_map<std::string, SynonymType>& declarationsMap)
+  - std::tuple<std::string, SynonymType, AttrNameType> parseElem(std::vector<std::shared_ptr<Token>>::iterator& it,
+        const std::vector<std::shared_ptr<Token>>::iterator& end, const std::unordered_map<std::string, SynonymType>& declarationsMap)
+  - AttrNameType getAttrNameType(const std::string& attrName)
+}
+
+class DeclarationParser {
+  - std::unordered_map<std::string, SynonymType> synonymTypeMap
+  + std::unordered_map<std::string, SynonymType> parse(std::vector<std::shared_ptr<Token>>::iterator& it,
+        const std::vector<std::shared_ptr<Token>>::iterator& end)
+  - SynonymType getSynonymType(const std::string& type)
+}
+
+class ParserUtil {
+  - std::unordered_map<SynonymType, StmtRefType> synonymStmtTypeMap
+  - std::unordered_map<SynonymType, EntRefType> synonymEntTypeMap
+
+  + std::pair<std::string, EntRefType> parseEntRef(std::vector<std::shared_ptr<Token>>::iterator& it,
+        const std::unordered_map<std::string, SynonymType>& declarationsMap)
+  + std::pair<std::string, StmtRefType> parseStmtRef(std::vector<std::shared_ptr<Token>>::iterator& it,
+        const std::unordered_map<std::string, SynonymType>& declarationsMap)
+  + std::pair<std::vector<std::string>, ExprSpecType> parseExprSpec(std::vector<std::shared_ptr<Token>>::iterator& it)
+  + void skipOpenBracket(std::vector<std::shared_ptr<Token>>::iterator& it)
+  + void skipComma(std::vector<std::shared_ptr<Token>>::iterator& it)
+  + void skipCloseBracket(std::vector<std::shared_ptr<Token>>::iterator& it)
+  + void skipAngleBracket(std::vector<std::shared_ptr<Token>>::iterator& it)
+  - StmtRefType getStmtRefType(TokenType type, const std::string& value, std::unordered_map<std::string, SynonymType> declarationsMap)
+  - EntRefType getEntRefType(TokenType type, const std::string& value, std::unordered_map<std::string, SynonymType> declarationsMap)
+  - ExprSpecType getExprSpecType(std::vector<std::shared_ptr<Token>>::iterator& it)
+  - StmtRefType getSynonymStmtType(SynonymType type)
+  - EntRefType getSynonymEntType(SynonymType type)
+  - std::vector<std::string> getExpr(std::vector<std::shared_ptr<Token>>::iterator& it)
+}
+
+Class EntEntParser {
+  + std::shared_ptr<Strategy> parse(std::vector<std::shared_ptr<Token>>::iterator& it,
+        const std::unordered_map<std::string, SynonymType>& declarationsMap)
+}
+
+Class StmtStmtParser {
+  + std::shared_ptr<Strategy> parse(std::vector<std::shared_ptr<Token>>::iterator& it,
+        const std::unordered_map<std::string, SynonymType>& declarationsMap)
+}
+
+Class StmtEntParser {
+  + std::shared_ptr<Strategy> parse(std::vector<std::shared_ptr<Token>>::iterator& it,
+        const std::unordered_map<std::string, SynonymType>& declarationsMap)
+}
+
+Class PatternParser {
+  + std::shared_ptr<AssignPatternStrategy> parse(std::vector<std::shared_ptr<Token>>::iterator& it,
+        const std::unordered_map<std::string, SynonymType>& declarationsMap)
+}
+
+Class WithParser {
+  - std::unordered_map<std::pair<SynonymType, std::string>, RefType, PairHash> typeMap
+  + std::shared_ptr<WithStrategy> parse(std::vector<std::shared_ptr<Token>>::iterator& it,
+        const std::unordered_map<std::string, SynonymType>& declarationsMap)
+  - std::pair<std::string, RefType> parseRef(std::vector<std::shared_ptr<Token>>::iterator& it,
+        const std::unordered_map<std::string, SynonymType>& declarationsMap)
+  - std::pair<std::string, RefType> parseAttrRef(std::vector<std::shared_ptr<Token>>::iterator& it,
+        const std::unordered_map<std::string, SynonymType>& declarationsMap)
+  - RefType getRefType(SynonymType type, const std::string& attrName)
+}
+
+enum SynonymType {
+  STMT,
+  READ,
+  PRINT,
+  CALL,
+  WHILE,
+  IF,
+  ASSIGN,
+  VARIABLE,
+  CONSTANT,
+  PROCEDURE,
+  INVALID
+}
+
+enum EntRefType {
+  STMT,
+  READ,
+  PRINT,
+  CALL,
+  WHILE,
+  IF,
+  ASSIGN,
+  VARIABLE,
+  CONSTANT,
+  PROCEDURE,
+  WILDCARD,
+  IDENT,
+  INVALID
+}
+
+enum StmtRefType {
+  STMT,
+  READ,
+  PRINT,
+  CALL,
+  WHILE,
+  IF,
+  ASSIGN,
+  VARIABLE,
+  CONSTANT,
+  PROCEDURE,
+  WILDCARD,
+  INTEGER,
+  INVALID
+}
+
+enum ExprSpecType {
+  EXPR,
+  WILDCARD,
+  WILDCARD_EXPR,
+  INVALID
+}
+
+enum RefType {
+  IDENT,
+  INTEGER,
+  PROCEDURE_PROCNAME,
+  CALL_PROCNAME,
+  VARIABLE_VARNAME,
+  READ_VARNAME,
+  PRINT_VARNAME,
+  CONSTANT_VALUE,
+  STMT_STMTNO,
+  READ_STMTNO,
+  PRINT_STMTNO,
+  CALL_STMTNO,
+  WHILE_STMTNO,
+  IF_STMTNO,
+  ASSIGN_STMTNO,
+  NONE
+}
+
+enum AttrNameType {
+  NAME,
+  INTEGER,
+  NONE
+}
+
+Parser --> SelectParser
+Parser --> DeclarationParser
+Parser --> EntEntParser
+Parser --> StmtStmtParser
+Parser --> StmtEntParser
+Parser --> PatternParser
+Parser --> WithParser
+
+EntEntParser --> ParserUtil
+StmtStmtParser --> ParserUtil
+StmtEntParser --> ParserUtil
+PatternParser --> ParserUtil
+
+DeclarationParser -- SynonymType
+SelectParser -- AttrNameType
+ParserUtil -- EntRefType
+ParserUtil -- StmtRefType
+ParserUtil -- ExprSpecType
+WithParser -- RefType
+
+@enduml

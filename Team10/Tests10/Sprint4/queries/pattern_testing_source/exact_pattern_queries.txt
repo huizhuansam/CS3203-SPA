@@ -1,0 +1,80 @@
+1 - a( _ , _ )
+assign a;
+Select a pattern a(_, _)
+1, 2, 3, 4, 5, 6, 7
+5000
+2 - Negative case
+assign a;
+Select a pattern a(_, "hello")
+none
+5000
+3 - Testing a(v, exp)
+assign a;
+Select a pattern a(_, "x + y + z")
+3
+5000
+4 - Testing a( _ , exp) and check for case sensitivity
+assign a;
+Select a pattern a(_, "20 / b + c - (d % e) * f")
+1
+5000
+5 - Testing a( _ , _exp_) and check for case sensitivity
+assign a;
+Select a pattern a(_, "20 / B + C - (d % E) * f")
+2
+5000
+6 - Testing a(x, exp) and check for case sensitivity
+assign a;
+Select a pattern a("F", "x + (y + z)")
+5
+5000
+7 - Testing a(x, exp)
+assign a;
+Select a pattern a("a", "(d % e)")
+none
+5000
+8 - Testing a(x, exp) and check left associativity
+assign a;
+Select a pattern a(_, "x + y + z")
+3
+5000
+9 - Check left associativity
+assign a;
+Select a pattern a(_, "x + (y + z)")
+4, 5
+5000
+10 -  Check exact matching with brackets
+assign a;
+Select a pattern a(_, "x + y * 5 - z + (a / 2) * b")
+7
+5000
+11 - Check exact matching with brackets
+assign a;
+Select a pattern a(_, "x + (y * 5) - z + (a / 2) * b")
+7
+5000
+12 - Check exact matching with brackets
+assign a;
+Select a pattern a(_, "(x + (y * 5)) - (z + (a / 2) * b)")
+none
+5000
+13 - Check exact matching with brackets
+assign a;
+Select a pattern a(_, "x + y * (5 - z) + (a / 2) * b")
+none
+5000
+14 - Check exact matching with brackets
+assign a;
+Select a pattern a(_, "(x + (y * 5)) - z + (a / 2) * b")
+7
+5000
+15 - Check exact matching with brackets
+assign a;
+Select a pattern a(_, "((x + (y * 5)) - z) + (a / 2) * b")
+7
+5000
+16 - not clause
+assign a;
+Select a pattern not a(_, "x + (y + z)")
+1, 2, 3, 6, 7
+5000

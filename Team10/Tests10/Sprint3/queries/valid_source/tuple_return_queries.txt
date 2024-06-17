@@ -1,0 +1,105 @@
+1 - Return 1, 0 related
+procedure p; if if; stmt s;
+Select <p> such that Parent(if, s)
+first, second, third, fourth, fifth
+5000
+2 - Return 1, 1 related
+procedure p; if if; stmt s;
+Select <if> such that Parent(if, s)
+6, 9
+5000
+3 - Return 1, 1 related
+stmt s1, s2;
+Select <s1> such that Follows(s1, s2)
+1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 17, 19, 20, 21, 23, 25, 27, 29
+5000
+4 - Return 2, 0 related
+procedure p; if if; stmt s; while w;
+Select <p, w> such that Parent(if, s)
+first 5, second 5, third 5, fourth 5, fifth 5, first 8, second 8, third 8, fourth 8, fifth 8
+5000
+5 - Return 2, 1 related
+procedure p; if if1, if2; stmt s; while w;
+Select <p, if1> such that Parent*(if1, if2)
+first 6, second 6, third 6, fourth 6, fifth 6
+5000
+5 - Return 2, 1 related
+procedure p; if if1, if2, if3; stmt s; while w;
+Select <if1, if3> such that Parent*(if1, if2)
+6 6, 6 9
+5000
+6 - Return 2, 2 related
+assign a; variable v;
+Select <a, v> such that Uses(a, v)
+3 b, 7 a, 7 b, 7 c, 13 a, 13 b, 13 x, 13 y, 13 z, 19 third, 20 b, 20 c, 20 d, 20 e, 20 f, 21 first, 25 A, 25 b, 25 c4
+5000
+7 - Return 3, 0 related
+assign a; variable v; print print; while w;
+Select <print, print, w> such that Uses(a, v)
+4 4 5, 16 16 5, 14 14 5, 23 23 5, 28 28 5, 4 4 8, 16 16 8, 14 14 8, 23 23 8, 28 28 8
+5000
+8 - Return 3, 1 related
+assign a; variable v; print print; while w; procedure p;
+Select <print, p, w> such that Uses(p, v)
+4 first 5, 16 first 5, 14 first 5, 23 first 5, 28 first 5, 4 first 8, 16 first 8, 14 first 8, 23 first 8, 28 first 8,4 second 5, 16 second 5, 14 second 5, 23 second 5, 28 second 5, 4 second 8, 16 second 8, 14 second 8, 23 second 8, 28 second 8,4 third 5, 16 third 5, 14 third 5, 23 third 5, 28 third 5, 4 third 8, 16 third 8, 14 third 8, 23 third 8, 28 third 8,4 fourth 5, 16 fourth 5, 14 fourth 5, 23 fourth 5, 28 fourth 5, 4 fourth 8, 16 fourth 8, 14 fourth 8, 23 fourth 8, 28 fourth 8,4 fifth 5, 16 fifth 5, 14 fifth 5, 23 fifth 5, 28 fifth 5, 4 fifth 8, 16 fifth 8, 14 fifth 8, 23 fifth 8, 28 fifth 8
+5000
+9 - Return 3, 2 related
+assign a; variable v; print print; while w; procedure p; if i;
+Select <i, w, a> such that Uses(w, v) such that Parent(i, w)
+6 8 3, 6 8 7, 6 8 13, 6 8 17, 6 8 18, 6 8 19, 6 8 20, 6 8 21, 6 8 25, 6 8 30
+5000
+10 - Return 3, 3 related
+assign a; variable v; print print; while w; procedure p; if i;
+Select <i, w, a> such that Uses(w, v) such that Parent(i, w) such that Uses(a, v)
+6 8 3, 6 8 7, 6 8 13, 6 8 19, 6 8 20, 6 8 21, 6 8 25
+5000
+11 - Check procedure.procName and if.stmt# 
+procedure p; if if;
+Select <p.procName, if.stmt#>
+first 6, second 6, third 6, fourth 6, fifth 6, first 9, second 9, third 9, fourth 9, fifth 9
+5000
+12 - Check call.stmt#, call.procName
+call c;
+Select <c.stmt#, c.procName> such that Follows(c, _)
+1 fifth, 10 fifth, 11 fourth, 29 second
+5000
+13 - Check variable.varName, read.stmt#, read.varName
+read r; variable v;
+Select <r.stmt#, r.varName, v.varName> such that Modifies(r, v)
+2 first first, 12 second second, 15 ab ab, 22 fifth fifth, 27 abcd abcd
+5000
+15 - Check print.stmt#, print.varName
+print p;
+Select <p.stmt#, p.varName> such that Follows(p, _)
+4 a, 23 first
+5000
+16 - Check assign.stmt#, constant.value
+assign a; constant c;
+Select <a.stmt#, c.value> such that Uses(a, "A")
+25 1, 25 2, 25 4, 25 5, 25 6, 25 123, 25 456, 25 42
+5000
+17 - Check stmt.stmt#, while.stmt#
+stmt s; while w;
+Select <w.stmt#, s.stmt#> such that Follows(w, s)
+5 19, 8 16
+5000
+21 - Pattern Return 1, 0 related
+while w; assign a;
+Select <w> pattern a(_, "456")
+5, 8
+5000
+22 - Pattern Return 1, 1 related
+while w; assign a; variable v;
+Select <a.stmt#> pattern a(_, _"2"_)
+13, 25
+5000
+23 - Pattern Return 2, 1 related
+while w; assign a; variable v;
+Select <a.stmt#, w.stmt#> pattern a(_, _"2"_)
+13 5, 25 5, 13 8, 25 8
+5000
+24 - Pattern Return 2, 2 related
+while w; assign a; variable v;
+Select <a.stmt#, v.varName> pattern a(v, _"2"_)
+13 a, 25 d
+5000

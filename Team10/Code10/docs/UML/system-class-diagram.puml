@@ -1,0 +1,93 @@
+@startuml
+skinparam classFontColor automatic
+skinparam classHeaderBackgroundColor #444
+
+class TestWrapper  {
+    + void TestWrapper::parse(std::string filename)
+    + void TestWrapper::evaluate(std::string query, std::list<std::string>& results)
+}
+
+namespace "SP" as SP_Component {
+
+class SP #aliceblue {
+    + void processSimple(std::string& source)
+}
+
+class "Tokenizer" as SP_Tokenizer #aliceblue {
+    + std::vector<std::shared_ptr<Token>> tokenize(std::string& input)
+}
+
+class "Parser" as SP_Parser #aliceblue {
+    + void parse(std::vector<std::shared_ptr<Token>> tokens): 
+}
+
+class "DesignExtractor" as SP_DesignExtractor #aliceblue {
+    + void extract(std::vector<std::shared_ptr<Token>> tokens)
+}
+
+}
+
+namespace "PKB" as PKB_Component {
+
+class WriteFacade #technology {
+
+}
+
+class PKB #technology {
+}
+
+class ReadFacade #technology {
+}
+
+}
+
+note left of WriteFacade
+  Allows SP to call methods to write data from the SIMPLE program analysed
+end note
+
+note right of ReadFacade
+  Allows QPS to call getter methods to retrieve information from PKB to evaluate queries
+end note
+
+note bottom of PKB
+  Stores all relationships, entities and pattern information of the SIMPLE program analysed
+end note
+
+namespace "QPS" as QPS_Component {
+
+class QPS #mistyrose {
+    + std::list<std::string> evaluateQuery(std::string& query)
+}
+
+class "Tokenizer" as QPS_Tokenizer #mistyrose {
+    + std::pair<std::vector<DeclarationToken>, ClauseToken> tokenize(const std::string& query)
+}
+
+class "Parser" as QPS_Parser #mistyrose {
+    + std::shared_ptr<Query> parse(const std::vector<DeclarationToken>& declarationTokens, ClauseToken clauseToken)
+}
+
+class Query #mistyrose {
+    + std::shared_ptr<std::unordered_map<std::string, std::list<std::string>>> evaluate()
+    + std::list<std::string> getResult()
+}
+
+}
+
+TestWrapper -down-> SP
+TestWrapper <-down-> QPS
+
+SP *-down- SP_Tokenizer
+SP *-down- SP_Parser
+SP *-down- SP_DesignExtractor
+SP_DesignExtractor -down-> WriteFacade
+
+WriteFacade -> PKB
+PKB -> ReadFacade
+ReadFacade -up-> Query
+
+QPS *-down- QPS_Tokenizer
+QPS *-down- QPS_Parser
+QPS *-down- Query
+
+@enduml

@@ -1,0 +1,50 @@
+procedure first {
+	call fifth;																			
+	read first;
+	a = b + 1;
+	print a;
+	while (a < 2 - c / b) {
+		if (1 == 2) then {
+			c = c + b + a;
+		} else {
+			while (((fourth + 4/4 - 2 / 1) == (x % a/b)) && (a <= 2)) {
+				if ((!(fifth != 2)) || (third > 2)) then {
+					call fifth;
+					call fourth;
+					read second;
+					a = x + y * 5 - z + (a / 2) * b;
+				} else {
+					print f1fth;
+				}
+				read ab;
+			}
+			print bc;
+		}
+		a = 123;
+		b = 456;
+	}
+	second = third;
+	third = 1 / b + c - (d % e) * f;
+	fourth = first;
+	read fifth;
+}
+
+procedure second {
+	print first;
+	call third;
+}
+
+procedure third {
+	d = A * 5 + b % (6 + c4) * (2 / 5 % 4);
+	call fourth;
+}
+
+procedure fourth {
+	read abcd;
+	print fifth;
+}
+
+procedure fifth {
+	call second;
+	fifth = 42;
+}

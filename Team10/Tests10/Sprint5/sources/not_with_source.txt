@@ -1,0 +1,52 @@
+procedure main {
+    read x;
+    b = x + 1;
+    c = t - y + z * 8 / a;
+    if (t == c) then {
+        print t;
+    } else {
+        t = c * z + y;
+        if (t == v) then {
+            read with;
+            while (y > 0) {
+                y = n * 45 + t;
+                if (t == x/45*y) then {
+                    with = x * d;
+                } else {
+                    print a;
+                }
+            }
+        } else {
+            y = c;
+        }
+    }
+}
+
+procedure with {
+    x = b;
+    if (b == x - (y - x) / 45%a) then {
+        call main;
+        b = main * with;
+        if (a == b * c) then {
+            if (v == c %3) then {
+                with = a /b *4;
+            } else {
+                main = c * 45;
+            }
+        } else {
+            y = y *n /9;
+        }
+    } else {
+        while (x > 0) {
+            call a;
+            b = 81 * n;
+            x = x - n;
+        }
+    }
+}
+
+procedure a {
+    read b;
+    read with;
+    print with;
+}

@@ -1,0 +1,38 @@
+@startuml
+
+class TwoWayMapManager<K, V> {
+  #leftToRightMap: std::unordered_map<K, std::vector<V>>
+  #rightoLeftMap: std::unordered_map<V, std::vector<K>>
+  #leftSet: std::unordered_set<K>
+  #rightSet: std::unordered_set<V>
+  +insert(K key, V value): void
+  +getLeftToRight(K& key): std::unordered_set<V>
+  +getRightToLeft(V& key): std::unordered_set<K>
+  +getAllPairs(): std::unordered_set<std::pair<K, V>, PairHash>
+  +getAllLefts(): std::unordered_set<K>
+  +getAllRights(): std::unordered_set<V>
+  +clear(): void
+}
+
+class CallStarStore extends TwoWayMapManager<K, V> {
+ +insert(K key, V value): void
+}
+
+class RelationshipManager {
+  -followsStore: TwoWayMapManager<int, int> 
+  -followsStarStore: TwoWayMapManager<int, int> 
+  -parentStore: TwoWayMapManager<int, int> 
+  -parentStarStore: TwoWayMapManager<int, int> 
+  -usesStore: TwoWayMapManager<int, std::string> 
+  -modifiesStore: TwoWayMapManager<int, std::string> 
+  -usesProcedureStore: TwoWayMapManager<std::string, std::string>
+  -modifiesProcedureStore: TwoWayMapManager<std::string, std::string>
+  -callStore: TwoWayMapManager<std::string, std::string>
+  -callStarStore: CallStarStore<std::string, std::string> 
+  -nextStore: TwoWayMapManager<int, int>
+}
+
+RelationshipManager *-- TwoWayMapManager
+RelationshipManager *-- CallStarStore
+
+@enduml

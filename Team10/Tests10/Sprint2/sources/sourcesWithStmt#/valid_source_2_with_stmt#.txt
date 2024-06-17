@@ -1,0 +1,47 @@
+procedure Example {
+  x = 2; // 1
+  z = 3; // 2
+  read Matilda; // 3
+  print roses; // 4
+  i = 5; // 5
+
+
+
+
+
+  while (i!=0) { // 6
+    x = x - 1; // 7
+    if (x==1) then { //8
+      z = x + 1;  // 9
+    } else {
+      y = z + x; //10
+    }
+    z = apple + x + i; //11
+    if (x==1) then { // 12
+      z = x + 1; //13
+    } else { 
+      x = z + x; //14
+      print apple; //15
+    }
+    i = i - 1; //16
+  }
+  if (x<0) then { //17
+    while (i>0) { //18
+      x = z * 3 + 2 * y; //19
+      i = i - 1;  //20
+    }
+    t = x + 1; //21
+    z = x + z; //22
+    print crossaint; //23
+  } else {
+    z = 1; //24
+    read book; //25
+    while (i < 0) { //26
+      read roses; // 27
+    }
+    while (i > 0) { //28
+      print roses; // 29
+    }
+  }
+  z = z + x + i; //30
+} 

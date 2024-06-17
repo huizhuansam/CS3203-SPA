@@ -1,0 +1,30 @@
+@startuml
+class AssignExpPatternStore {
+- assignExps: std::unordered_map<std::pair<std::string, std::string>, std::vector<std::string>, PairHash>
+
++ addExp(int stmtNo, const std::string& var, const std::vector<std::string>& infixTokens): void
++ clear(): void
++ getAllExpPairs(): std::vector<std::pair<std::string, std::string>>
++ getExpPairsPartialMatch(const std::string& var, const std::vector<std::string>& infixTokens): std::vector<std::pair<std::string, std::string>>
++ getExpPairsSynonymPartialMatch(const std::vector<std::string>& infixTokens): std::vector<std::pair<std::string, std::string>>
++ getExpPairsExactMatch(const std::string& var, const std::vector<std::string>& infixTokens): std::unordered_set<std::pair<std::string, std::string>, PairHash>
++ getExpPairsSynonymExactMatch(const std::vector<std::string>& infixTokens): std::unordered_set<std::pair<std::string, std::string>, PairHash> 
+}
+
+class TwoWayMapManager<K, V> {
+ # leftToRightMap: std::unordered_map<K, std::vector<V>>
+ # rightToLeftMap: std::unordered_map<V, std::vector<K>>
+ # leftSet: std::unordered_set<K>
+ # rightSet: std::unordered_set<V>
+}
+
+class PatternManager {
+ - assignExpPatternStore: AssignExpPatternStore
+ - whileExpPatternStore: TwoWayMapManager<int, std::string>
+ - ifExpPatternStore: TwoWayMapManager<int, std::string>
+}
+
+PatternManager *-- AssignExpPatternStore
+PatternManager *-- TwoWayMapManager
+
+@enduml

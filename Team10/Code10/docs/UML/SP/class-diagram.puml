@@ -1,0 +1,35 @@
+@startuml
+
+class SP {
+    + void processSimple(std::string& input)
+}
+
+class Tokenizer {
+    + std::vector<std::unique_ptr<Token>> tokenize(std::string& programSource)
+}
+note bottom of Tokenizer
+  Details of Tokenizer are not shown in this class diagram.
+  Please refer to the diagram: tokenizer-class-diagram.svg
+end note
+
+class Parser {
+    + void parse(std::vector<std::unique_ptr<Token>>& tokens)
+}
+note bottom of Parser
+  Details of Parser are not shown in this class diagram.
+  Please refer to the diagram: parser-class-diagram.svg
+end note
+
+class DesignExtractor {
+    + void extract(std::vector<std::unique_ptr<Token>>& tokens)
+}
+note bottom of DesignExtractor
+  Details of DesignExtractor are not shown in this class diagram.
+  Please refer to the diagram: design-extractor-class-diagram.svg
+end note
+
+Tokenizer <-> SP
+SP -> Parser
+SP --> DesignExtractor
+
+@enduml

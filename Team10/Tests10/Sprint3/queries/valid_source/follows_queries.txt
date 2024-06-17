@@ -1,0 +1,250 @@
+1 - (_,_)
+stmt s;
+Select s such that Follows(_,_)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30
+5000
+2 - (integer, integer)
+stmt s;
+Select s such that Follows(5, 19)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30
+5000
+3- (integer, integer)
+stmt s;
+Select s such that Follows(5, 20)
+none
+5000
+4- (integer, integer)
+stmt s;
+Select s such that Follows(9, 10)
+none
+5000
+5 - (integer, integer)
+stmt s;
+Select s such that Follows(9, 15)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30
+5000
+6 - (stmt, integer)
+stmt s;
+Select s such that Follows(s, 19)
+5
+5000
+7 - (integer, stmt)
+stmt s;
+Select s such that Follows(6, s)
+17
+5000
+8 - (assign, integer)
+assign a;
+Select a such that Follows(a, 26)
+25
+5000
+9 - (integer, assign)
+assign a;
+Select a such that Follows(12, a)
+13
+5000
+10 - (call, integer)
+call c;
+Select c such that Follows(c, 30)
+29
+5000
+11 - (integer, call)
+call c;
+Select c such that Follows(23, c)
+24
+5000
+12 - (read, integer)
+read read;
+Select read such that Follows(read, 13)
+12
+5000
+13 - (integer, read)
+read read;
+Select read such that Follows(11, read)
+12
+5000
+14 - (print, integer)
+print p;
+Select p such that Follows(p, 12)
+none
+5000
+15 - (integer, print)
+print p;
+Select p such that Follows(27, p)
+28
+5000
+16 - (if, integer)
+if if;
+Select if such that Follows(if, 15)
+9
+5000
+17 - (integer, if)
+if if;
+Select if such that Follows(2, if)
+none
+5000
+18 - (while, integer)
+while W;
+Select W such that Follows(W, 19)
+5
+5000
+19 - (integer, while)
+while W;
+Select W such that Follows(4, W)
+5
+5000
+20 - (_, integer)
+stmt s;
+Select s such that Follows(_, 29)
+none
+5000
+21 - (_, integer)
+stmt s;
+Select s such that Follows(_, 26)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30
+5000
+22 - (integer, _)
+stmt s;
+Select s such that Follows(29, _)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30
+5000
+23 - (integer, _)
+stmt s;
+Select s such that Follows(30, _)
+none
+5000
+24 - (stmt, stmt)
+stmt s1, s2;
+Select s1 such that Follows(s1, s2)
+1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 17, 19, 20, 21, 23, 25, 27, 29
+5000
+25 - (stmt, stmt)
+stmt s1, s2;
+Select s2 such that Follows(s1, s2)
+2, 3, 4, 5, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21, 22, 24, 26, 28, 30
+5000
+26 - (assign, stmt)
+stmt s1, s2; assign a;
+Select a such that Follows(a, s2)
+3, 17, 19, 20, 21, 25
+5000
+27 - (stmt, call)
+stmt s1, s2; call c;
+Select c such that Follows(s1, c)
+11, 24, 26
+5000
+28 - (call, stmt)
+stmt s1, s2; call c;
+Select c such that Follows(c, s2)
+1, 10, 11, 29
+5000
+29 - (read, stmt)
+stmt s1, s2; read r1;
+Select r1 such that Follows(r1, s1)
+2, 12, 27
+5000
+30 - (stmt, read)
+stmt s1, s2; read r3ad;
+Select r3ad such that Follows(s1, r3ad)
+2, 12, 15, 22
+5000
+31 - (stmt, print)
+stmt s1, s2; print p;
+Select p such that Follows(s2, p)
+4, 16, 28
+5000
+32 - (print, stmt)
+stmt s1, s2; print p;
+Select p such that Follows(p, s1)
+4, 23
+5000
+33 - (if, stmt)
+stmt s1, s2; if if;
+Select if such that Follows(if, s2)
+6, 9
+5000
+34 - (stmt, if)
+stmt s1, s2; if ifs;
+Select ifs such that Follows(s2, ifs)
+none
+5000
+35 - (stmt, while)
+stmt s1, s2; while while;
+Select while such that Follows(s1, while)
+5
+5000
+36 - (while, stmt)
+stmt s1, s2; while wwww;
+Select wwww such that Follows(wwww, s2)
+5, 8
+5000
+37 - (stmt, _)
+stmt s1, s2;
+Select s1 such that Follows(s1, _)
+1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 17, 19, 20, 21, 23, 25, 27, 29
+5000
+38 - (_, stmt)
+stmt stmt1, stmt2;
+Select stmt1 such that Follows(_, stmt1)
+2, 3, 4, 5, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21, 22, 24, 26, 28, 30
+5000
+39 - (assign, _)
+stmt s1, s2; assign ass, ass1;
+Select ass such that Follows(ass, _)
+3, 17, 19, 20, 21, 25
+5000
+40 - (_, assign)
+stmt s1, s2; assign ass, ass1;
+Select ass1 such that Follows(_, ass1)
+3, 13, 17, 18, 19, 20, 21, 30
+5000
+41 - (call, _)
+stmt s1, s2; call c4;
+Select c4 such that Follows(c4, _)
+1, 10, 11, 29
+5000
+42 - (_, call)
+stmt s1, s2; call c4;
+Select c4 such that Follows(_, c4)
+11, 24, 26
+5000
+43 - (read, _)
+stmt s; read r3ad;
+Select r3ad such that Follows(r3ad, _)
+2, 12, 27
+5000
+44 - (_, read)
+stmt s1, s2; read r3ad;
+Select r3ad such that Follows(_, r3ad)
+2, 12, 15, 22
+5000
+45 - (print, _)
+stmt s1, s2; print pr1nt;
+Select pr1nt such that Follows(pr1nt, _)
+4, 23
+5000
+46 - (_, print)
+stmt s1, s2; print print;
+Select print such that Follows(_, print)
+4, 16, 28
+5000
+47 - (if, _)
+stmt s; if ifs;
+Select ifs such that Follows(ifs, _)
+6, 9
+5000
+48 - (_, if)
+stmt s1; if if;
+Select if such that Follows(_, if)
+none
+5000
+49 - (while, _)
+stmt s2; while whole;
+Select whole such that Follows(whole, _)
+5, 8
+5000
+50 - (_, while)
+stmt s1, s2; while whole;
+Select whole such that Follows(_, whole)
+5
+5000

@@ -1,0 +1,39 @@
+procedure first {
+	call second;
+}
+
+procedure second {
+    call third;
+}
+
+procedure third {
+	call fourth;
+}
+
+procedure fourth {
+	call fifth;
+}
+
+procedure fifth {
+	call sixth;
+}
+
+procedure sixth {
+	call seventh;
+}
+
+procedure seventh {
+	call eighth;
+}
+
+procedure eighth {
+	call nineth;
+}
+
+procedure nineth {
+	call tenth;
+}
+
+procedure tenth {
+	a = b;
+}

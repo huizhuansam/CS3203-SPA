@@ -1,0 +1,80 @@
+@startuml
+title SP Sequence Diagram
+
+actor User
+participant SPA
+participant FileReader
+participant SP
+participant Tokenizer
+participant Parser
+participant DesignExtractor
+participant WriteFacade
+
+User -> SPA: parse(fileName)
+activate SPA
+
+SPA -> FileReader: FileReader(fileName)
+activate FileReader
+
+SPA -> FileReader: getContent
+activate FileReader
+
+alt Exception
+    FileReader --> SPA: runtime_error
+    SPA --> User: runtime_error
+else Success
+    FileReader --> SPA: content
+    deactivate FileReader
+    deactivate FileReader
+    SPA -> SP: SP()
+    activate SP
+
+    SPA -> SP: processSimple(content)
+    activate SP
+
+    SP -> Tokenizer: Tokenizer::tokenize(input)
+    activate Tokenizer
+
+    alt Exception
+        Tokenizer --> SP: runtime_error
+        SP --> SPA: runtime_error
+        SPA --> User: runtime_error
+    else Success
+        Tokenizer --> SP: tokens
+        deactivate Tokenizer
+
+        SP -> Parser: Parser::parse(tokens)
+        activate Parser
+
+        alt Exception
+            Parser --> SP: runtime_error
+            SP --> SPA: runtime_error
+            SPA --> User: runtime_error
+        else
+            Parser --> SP: void
+            deactivate Parser
+
+            SP -> DesignExtractor: DesignExtractor::extract(tokens)
+            activate DesignExtractor
+
+            DesignExtractor -> WriteFacade: <API CALLS>
+            activate WriteFacade
+
+            WriteFacade --> DesignExtractor: void
+            deactivate WriteFacade
+            
+            DesignExtractor --> SP: void  
+            deactivate DesignExtractor
+
+            SP --> SPA: void
+            deactivate SP
+            deactivate SP
+
+            SPA --> User: Source processing successful
+        end
+    end
+end
+deactivate FileReader
+deactivate FileReader
+deactivate SPA
+@enduml

@@ -1,0 +1,229 @@
+@startuml
+class DesignExtractor {
+    + void extract(std::vector<std::shared_ptr<Token>>& tokens)
+    + void resetStmtNumber();
+    + int getStmtNumber();
+    + void incrementStmtNumber()
+}
+
+interface IExtractor {
+    + void extract(std::vector<std::shared_ptr<Token>>::iterator& it, std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class ProgramExtractor implements IExtractor {
+    - WriteFacade writer
+    + void extract(std::vector<std::shared_ptr<Token>>::iterator& it, std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class ProcedureExtractor implements IExtractor {
+    - WriteFacade writer
+    + void extract(std::vector<std::shared_ptr<Token>>::iterator& it, std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class StmtLstExtractor implements IExtractor {
+    - WriteFacade writer
+    - int firstStmtNo
+    - int lastStmtNo
+    - int_LIST nonNestedStmtNo
+    - std::unordered_set<std::string> varUsed
+    - std::unordered_set<std::string> varModified
+
+    + int getFirstStmtNo()
+    + int getLastStmtNo()
+    + int_LIST getNonNestedStmtNo()
+    + std::unordered_set<std::string> getVarModified()
+    + std::unordered_set<std::string> getVarUsed()
+    + void extract(std::vector<std::shared_ptr<Token>>::iterator& it, std::vector<std::shared_ptr<Token>>::iterator& end)
+    - void setFirstStmtNo(int stmtNo)
+    - void setLastStmtNo(int stmtNo)
+    - void addNonNestedStmtNo(int stmtNo)
+    - void addVarUsedByStmt(std::unordered_set<std::string> varUsedByStmt)
+    - void addVarModifiedByStmt(std::unordered_set<std::string> varModifiedByStmt)
+    - void processFollowsRelationship()
+}
+
+interface IStmtExtractor extends IExtractor {
+    + std::unordered_set<int> getLastExecutedStmtNumbers();
+    + void dumpContentsInto(StmtLstExtractor& stmtListExtractor, int currentStmtNo)
+}
+
+class ContainerStmtExtractor implements IStmtExtractor {
+    # WriteFacade writer
+    - std::unordered_set<std::string> varUsed
+    - std::unordered_set<std::string> varModified
+    - std::unordered_map<int, std::unordered_set<std::string>> stmtCallMap
+    - std::unordered_set<std::string> procCalled
+    + void addAllVarUsedToThisStmt(StmtLstExtractor& stmtListExtractor)
+    + void addAllVarModifiedToThisStmt(StmtLstExtractor& stmtListExtractor)
+    + void addAllProcCalledToThisStmt(StmtLstExtractor& stmtListExtractor)
+    + void writeAllVarUsed(int currentStmtNo)
+    + void writeAllVarModified(int currentStmtNo)
+    + void addVarUsed(const std::string& var)
+    + void setStmtCallMap(std::unordered_map<int, std::unordered_set<std::string>>& map)
+    + void appendToStmtCallMap(std::unordered_map<int, std::unordered_set<std::string>>& map)
+    + void addProcCalled(const std::string& proc)
+    + std::unordered_map<int, std::unordered_set<std::string>>& getStmtCallMap()
+    + void dumpContentsInto(StmtLstExtractor& stmtListExtractor, int currentStmtNo)
+}
+
+class ReadExtractor implements IStmtExtractor {
+    - WriteFacade writer
+    + void extract(std::vector<std::shared_ptr<Token>>::iterator& it, std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class PrintExtractor implements IStmtExtractor {
+    - WriteFacade writer
+    + void extract(std::vector<std::shared_ptr<Token>>::iterator& it, std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class CallExtractor implements IStmtExtractor {
+    - WriteFacade writer
+    - std::unordered_set<std::string> procCalled
+    + void extract(std::vector<std::unique_ptr<Token>>::iterator& it, const std::vector<std::unique_ptr<Token>>::iterator& end)
+    + void dumpContentsInto(StmtLstExtractor& stmtListExtractor, int currentStmtNo)
+}
+
+class WhileExtractor extends ContainerStmtExtractor {
+    - int thisStmtNo
+    - void consumeCondition(std::vector<std::unique_ptr<Token>>::iterator& it, const std::vector<std::unique_ptr<Token>>::iterator& end)
+    - void consumeStmtList(std::vector<std::unique_ptr<Token>>::iterator& it, const std::vector<std::unique_ptr<Token>>::iterator& end)
+    - void writeParentChildRelationship(StmtLstExtractor& stmtListExtractor)
+    - void writeNextRelationshipToThisStmt(StmtLstExtractor& stmtListExtractor)
+    + void extract(std::vector<std::unique_ptr<Token>>::iterator& it, const std::vector<std::unique_ptr<Token>>::iterator& end)
+    + std::unordered_set<int> getLastExecutedStmtNumbers()
+}
+
+class IfExtractor extends ContainerStmtExtractor {
+    - std::unordered_set<int> trueBranchLastExecutedStmtNumbers
+    - std::unordered_set<int> falseBranchLastExecutedStmtNumbers
+    - void consumeCondition(std::vector<std::unique_ptr<Token>>::iterator& it, const std::vector<std::unique_ptr<Token>>::iterator& end)
+    - void consumeTrueBranch(std::vector<std::unique_ptr<Token>>::iterator& it, const std::vector<std::unique_ptr<Token>>::iterator& end, int currentStmtNo, StmtLstExtractor& stmtListExtractor)
+    - void consumeFalseBranch(std::vector<std::unique_ptr<Token>>::iterator& it, const std::vector<std::unique_ptr<Token>>::iterator& end, int currentStmtNo, StmtLstExtractor& stmtListExtractor)
+    - void writeParentChildRelationship(StmtLstExtractor& stmtListExtractor, int currentStmtNo)
+    - void consumeEntities(StmtLstExtractor& stmtListExtractor, int currentStmtNo)
+    + void extract(std::vector<std::unique_ptr<Token>>::iterator& it, const std::vector<std::unique_ptr<Token>>::iterator& end)
+    + std::unordered_set<int> getLastExecutedStmtNumbers()
+}
+
+class AssignExtractor extends IStmtExtractor {
+    - WriteFacade writer
+    - std::unordered_set<std::string> varUsed
+    - std::unordered_set<std::string> varModified
+    - std::string varModifiedName
+    - void extractVarName(std::vector<std::unique_ptr<Token>>::iterator& it, const std::vector<std::unique_ptr<Token>>::iterator& end)
+    - void extractExpression(std::vector<std::unique_ptr<Token>>::iterator& it, const std::vector<std::unique_ptr<Token>>::iterator& end)
+    - void processModifies(const std::string& varName)
+    - void processUsesAndPattern(std::vector<std::unique_ptr<Token>>::iterator& exprStart, std::vector<std::unique_ptr<Token>>::iterator& exprEnd)
+    - void writeAssignExprPattern(const std::string& var, const std::vector<std::string>& expr)
+    + void extract(std::vector<std::unique_ptr<Token>>::iterator& it, const std::vector<std::unique_ptr<Token>>::iterator& end)
+    + void dumpContentsInto(StmtLstExtractor& stmtListExtractor, int currentStmtNo)
+}
+
+class CondExprExtractor implements IExtractor {
+    - WriteFacade writer
+    + void extract(std::vector<std::shared_ptr<Token>>::iterator& it, std::vector<std::shared_ptr<Token>>::iterator& end)
+    - bool isOpenBracketOfCondExpr(std::vector<std::shared_ptr<Token>>::iterator& it)
+}
+
+class RelExprExtractor implements IExtractor {
+    - WriteFacade writer
+    + void extract(std::vector<std::shared_ptr<Token>>::iterator& it, std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class RelFactorExtractor implements IExtractor {
+    - WriteFacade writer
+    + void extract(std::vector<std::shared_ptr<Token>>::iterator& it, std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class ExprExtractor implements IExtractor {
+    - WriteFacade writer
+    + void extract(std::vector<std::shared_ptr<Token>>::iterator& it, std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class TermExtractor implements IExtractor {
+    - WriteFacade writer
+    + void extract(std::vector<std::shared_ptr<Token>>::iterator& it, std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class FactorExtractor implements IExtractor {
+    - WriteFacade writer
+    + void extract(std::vector<std::shared_ptr<Token>>::iterator& it, std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class VariableExtractor implements IExtractor {
+    - WriteFacade writer
+    + void extract(std::vector<std::shared_ptr<Token>>::iterator& it, std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class ConstantExtractor implements IExtractor {
+    - WriteFacade writer
+    + void extract(std::vector<std::shared_ptr<Token>>::iterator& it, std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class WriteFacade {
+    - PKB pkb
+    + void clearPKB()
+    + void addVariable(const std::string& var)
+    + void addConstant(const std::string& constant)
+    + void addProcedure(const std::string& proc)
+    + void addStatement(StatementType type, int stmtNo)
+    + void insertStmtCallsProc(int stmtNo, const std::string& procName)
+    + void insertStmtPrintsVar(int stmtNo, const std::string& var)
+    + void insertStmtReadsVar(int stmtNo, const std::string& var)
+    + void addAssignExpPattern(int stmtNo, const std::string& var, const std::vector<std::string>& exp)
+    + void addWhileControlVariable(int stmtNo, const std::string& var)
+    + void addIfControlVariable(int stmtNo, const std::string& var)
+    + void insertDirectParentChildRelationship(int parentStmtNo, int childStmtNo); 
+    + void insertParentStarRelationship(int parentStmtNo, int childStmtNo)
+    + void insertDirectFollowsRelationship(int beforeStmtNo, int afterStmtNo)
+    + void insertFollowsStarRelationship(int beforeStmtNo, int afterStmtNo)
+    + void insertCallsRelationship(const std::string& sourceProcName, const std::string& targetProcName)
+    + void insertModifies(int stmtNo, const std::string& var)
+    + void insertModifiesProcedure(const std::string& procName, const std::string& var)
+    + void insertUses(int stmtNo, const std::string& var)
+    + void insertUsesProcedure(const std::string& str1, const std::string& str2)
+    + void insertNextRelationship(int previousStmtNo, int nextStmtNo)
+}
+
+class IStmtExtractorFactory {
+    - <u>const std::unordered_map<TokenType, std::function<std::unique_ptr<IStmtExtractor>(WriteFacade&)>> tokenTypeToExtractorMap
+    - <u>const std::unordered_map<TokenType, StatementType> tokenTypeToStatementTypeMap
+    + <u>std::unique_ptr<IStmtExtractor> of(std::vector<std::unique_ptr<Token>>::iterator& it, WriteFacade& writer)
+}
+
+DesignExtractor --> ProgramExtractor
+ProgramExtractor --> ProcedureExtractor
+ProcedureExtractor --> StmtLstExtractor
+StmtLstExtractor --> IStmtExtractor
+
+ReadExtractor --> VariableExtractor
+PrintExtractor --> VariableExtractor
+WhileExtractor --> CondExprExtractor
+WhileExtractor --> StmtLstExtractor
+IfExtractor --> CondExprExtractor
+IfExtractor --> StmtLstExtractor
+AssignExtractor --> VariableExtractor
+AssignExtractor --> ExprExtractor
+
+CondExprExtractor --> RelExprExtractor
+RelExprExtractor --> RelFactorExtractor
+RelFactorExtractor --> ExprExtractor
+ExprExtractor --> TermExtractor
+TermExtractor --> FactorExtractor
+FactorExtractor --> VariableExtractor
+FactorExtractor --> ConstantExtractor
+FactorExtractor --> ExprExtractor
+
+WriteFacade <- ProcedureExtractor
+WriteFacade <- AssignExtractor
+WriteFacade <- ReadExtractor
+WriteFacade <- PrintExtractor
+WriteFacade <- WhileExtractor
+WriteFacade <- IfExtractor
+WriteFacade <- StmtLstExtractor
+WriteFacade <- VariableExtractor
+WriteFacade <- ConstantExtractor
+WriteFacade <- CallExtractor
+
+IStmtExtractorFactory <- StmtLstExtractor
+@enduml

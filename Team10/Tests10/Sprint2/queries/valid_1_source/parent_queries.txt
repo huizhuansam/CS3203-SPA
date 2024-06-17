@@ -1,0 +1,45 @@
+1 - Select statements that is a parent of another statement
+stmt s1, s2;
+Select s1 such that Parent(s1, s2)
+3, 7, 13
+5000
+2 - Select statements that is a child of another statement
+stmt s1, s2;
+Select s2 such that Parent(s1, s2)
+4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15
+5000
+3 - Select statements that statement 3 is a parent of
+stmt s;
+Select s such that Parent(3, s)
+4, 5, 6
+5000
+4 - Select statements that statement 7 is a parent of
+stmt s;
+Select s such that Parent(7, s)
+8, 9, 10, 11, 12, 13
+5000
+5 - Select statements that statement 7 is a transitive parent of
+stmt s;
+Select s such that Parent*(7, s)
+8, 9, 10, 11, 12, 13, 14, 15
+5000
+6 - Select statement that is a parent of statement 15
+stmt s;
+Select s such that Parent(s, 15)
+13
+5000
+7 - Select statements that are transitive parents of statement 15
+stmt s;
+Select s such that Parent*(s, 15)
+7, 13
+5000
+8 - Selet statement that is the parent of statement 2 - NEGATIVE CASE
+stmt s;
+Select s such that Parent(s, 2)
+none
+5000
+9 - Selet statements that are transitive parents of statement 16 - NEGATIVE CASE
+stmt s;
+Select s such that Parent(s, 16)
+none
+5000

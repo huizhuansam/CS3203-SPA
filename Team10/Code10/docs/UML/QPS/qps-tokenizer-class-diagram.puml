@@ -1,0 +1,102 @@
+@startuml
+
+class Tokenizer {
+  + std::vector<std::shared_ptr<Token>> tokenize(const std::string& queryString)
+}
+
+class Token {
+    - TokenType type
+    - std::string value
+
+    + Token(TokenType type, std::string value)
+    + TokenType getType()
+    + std::string getValue()
+    + bool isRelRef()
+    + bool isStmtRef()
+    + bool isEntRef()
+}
+
+enum TokenType {
+  NAME,
+  INTEGER,
+  SEMICOLON,
+  OPEN_BRACKET,
+  CLOSE_BRACKET,
+  OPEN_ANGLE_BRACKET,
+  CLOSE_ANGLE_BRACKET,
+  PERIOD,
+  ATTR_NAME,
+  COMMA,
+  PLUS,
+  MINUS,
+  TIMES,
+  DIV,
+  MOD,
+  EQ,
+  DOUBLE_QUOTE,
+  WILDCARD,
+  WHITESPACE,
+}
+
+class StringHandler {
+    + bool isWhitespace(char ch)
+
+    + bool isValidSymbol(char ch)
+
+    + bool isLetter(char ch)
+
+    + bool isDigit(char ch)
+
+    + bool hasNextChar(std::string::const_iterator& it, std::string::const_iterator& end)
+
+    + char getNextChar(std::string::const_iterator& it)
+
+    + VOID pointNextChar(std::string::const_iterator& it)
+
+    + bool hasPreviousChar(std::string::const_iterator& it, std::string::const_iterator& end)
+
+    + VOID pointPreviousChar(std::string::const_iterator& it)
+
+    + std::string formWordString(std::string::const_iterator& it, std::string::const_iterator& end)
+
+    + std::string formNumberString(std::string::const_iterator& it, std::string::const_iterator& end)
+}
+
+class TokenCreator {
+    + std::unique_ptr<TokenCreator> of(char character, bool isLasCharPeriod)
+    + std::shared_ptr<Token> createToken(std::string::const_iterator& it, std::string::const_iterator& end)
+}
+
+class AttrNameTokenCreator extends TokenCreator {
+    - std::unordered_set<std::string> validAttrNameSet
+    + std::shared_ptr<Token> createToken(std::string::const_iterator& it, std::string::const_iterator& end)
+}
+
+class IntegerTokenCreator extends TokenCreator {
+    + std::shared_ptr<Token> createToken(std::string::const_iterator& it, std::string::const_iterator& end)
+}
+
+class NameTokenCreator extends TokenCreator {
+    + std::shared_ptr<Token> createToken(std::string::const_iterator& it, std::string::const_iterator& end)
+}
+
+class SymbolTokenCreator extends TokenCreator {
+    + std::shared_ptr<Token> createToken(std::string::const_iterator& it, std::string::const_iterator& end)
+}
+
+class WhitespaceTokenCreator extends TokenCreator {
+    + std::shared_ptr<Token> createToken(std::string::const_iterator& it, std::string::const_iterator& end)
+}
+
+Tokenizer <-down-> TokenCreator
+TokenCreator <-> StringHandler
+
+Token *-down- TokenType
+
+AttrNameTokenCreator -- Token
+IntegerTokenCreator -- Token
+NameTokenCreator -- Token
+SymbolTokenCreator -- Token
+WhitespaceTokenCreator -- Token
+
+@enduml

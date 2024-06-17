@@ -1,0 +1,14 @@
+procedure procedure {
+    read print;
+    print read;
+    if = then + else;
+    while (if == if) {
+        if = if + 11;
+    }
+
+    if (while != while) then {
+        then = 22 - then;
+    } else {
+        else = 33 * else;
+    }
+}

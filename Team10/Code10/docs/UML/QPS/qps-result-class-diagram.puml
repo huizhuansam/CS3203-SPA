@@ -1,0 +1,37 @@
+@startuml
+
+class Result {
+    - std::unordered_map<std::string, int> headers
+    - std::vector<std::vector<std::string>> data
+    + Result()
+    + Result(const std::unordered_map<std::string, int>& headers, const std::vector<std::vector<std::string>>& data)
+    + std::unordered_map<std::string, int>& getHeaders()
+    + std::vector<std::string> getSortedHeaderNames()
+    + std::vector<std::string> getHeaderNamesWithoutAttrNames()
+    + std::vector<SynonymType> getHeaderSynonymTypes(const std::vector<std::string>& headerNames)
+    + int getHeaderIndex(const std::string& header)
+    + void addHeader(const std::string& headerName, int index)
+    + bool isDataEmpty()
+    + std::vector<std::vector<std::string>>& getData()
+    + void setData(const std::vector<std::vector<std::string>>& newData)
+    + void getDataByHeaderNames(std::vector<std::string>& headerNames, std::list<std::list<std::string>>& resultData)
+    + void getDataByHeaderNames(std::vector<std::string>& headerNames, std::vector<std::vector<std::string>>& resultData)
+    + void appendRow(std::vector<std::string>& row)
+    + void getTupleByHeaderIndices(std::vector<std::string> row, std::vector<int>& desiredHeaderIndices, std::vector<std::string>& tuple)
+    + void getCommonHeaders(Result& r1, Result& r2, std::vector<std::string>& commonHeaders)
+    + void getUncommonHeaders(Result& r1, Result& r2, std::vector<std::string>& uncommonHeaders)
+    + void flattenData(std::list<std::list<std::string>>& dataToFlatten, std::list<std::string>& flattenedData)
+    + std::list<std::string> getFlattenListByHeaderNames(std::vector<std::string>& headerNames)
+    + void merge(Result& r1, Result& r2, Result& resultMerged)
+    + void innerJoin(Result& r1, Result& r2, std::vector<std::string>& commonHeaders, Result& resultTable)
+    + void innerJoinByHeaders(Result& r1, Result& r2, const std::string& leftHeader, const std::string& rightHeader, Result& resultTable)
+    + void crossProduct(Result& r1, Result& r2, Result& resultTable)
+    + void subtract(Result& r1, Result& r2, Result& resultSubtracted)
+    + void populateAllHeaders(const Result& r1, Result& resultTable, const std::vector<std::string>& addedHeaders)
+    + void findCommonHeaderIndices(Result r1, Result& r2, std::vector<std::string>& commonHeaders, std::vector<int>& commonR1HeaderIndices, std::vector<int>& commonR2HeaderIndices)
+    + void findExtraHeaderIndices(Result& r2, const std::vector<std::string>& extraR2Headers, std::vector<int>& extraR2HeaderIndices)
+    + std::string getTupleByHeaderIndicesAsString(std::vector<std::string> row, std::vector<int>& desiredHeaderIndices)
+    + bool operator==(const Result& other)
+}
+
+@enduml

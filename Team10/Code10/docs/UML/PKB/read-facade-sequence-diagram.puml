@@ -1,0 +1,23 @@
+@startuml
+
+activate QPS
+QPS -> ReadFacade: getStmtThatFollowsAfter(2)
+activate ReadFacade
+
+
+ReadFacade -> PKB: getStmtThatFollowsAfter(2)
+activate PKB
+
+PKB -> RelationshipManager: getStmtThatFollowsAfter(2)
+activate RelationshipManager
+
+
+RelationshipManager -> TwoWayMapManager: getLeftToRight(2)
+activate TwoWayMapManager
+TwoWayMapManager --> RelationshipManager:int
+
+RelationshipManager --> PKB: int
+PKB --> ReadFacade: int
+
+QPS <-- ReadFacade: int
+@enduml

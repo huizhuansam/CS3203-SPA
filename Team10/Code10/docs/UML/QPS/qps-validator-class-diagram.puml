@@ -1,0 +1,202 @@
+@startuml
+
+class Validator {
+  + void validate(tokens: std::vector<std::shared_ptr<Token>>&)
+}
+
+interface IValidator {
+  + void validate(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end)
+  + void expect(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end, TokenType expectedType, const std::string& rule)
+  + void expect(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end, const std::string& expectedValue, const std::string& rule)
+  + void consume(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end, TokenType type, const std::string& rule)
+  + void consume(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end, const std::string& value, const std::string& rule)
+  + void consumeOptional(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end, TokenType type)
+  + void consumeOptional(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end, const std::string& value)
+}
+
+class SyntaxValidator implements IValidator {
+  + void validate(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class DeclarationListValidator implements IValidator {
+  + void validate(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class DeclarationValidator implements IValidator {
+  - std::unordered_set<std::string> designEntitySet;
+  + void validate(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class SelectResultClauseValidator implements IValidator {
+  + void validate(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class TupleValidator implements IValidator {
+  + void validate(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class TupleValidator implements IValidator {
+  + void validate(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class TupleElemValidator implements IValidator {
+  + void validate(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class ClauseListValidator implements IValidator {
+  - std::unordered_map<std::string, std::shared_ptr<IValidator>> tokenToValidatorMap
+  + void validate(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+
+class SuchThatClauseValidator implements IValidator {
+  + void validate(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class RelCondValidator implements IValidator {
+  + void validate(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class RelRefValidator implements IValidator {
+  - std::unordered_set<std::string> relRefSet
+  + void validate(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class EntRefOrStmtRefAndEntRefValidator implements IValidator {
+  + void validate(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class EntOrStmtRefValidator implements IValidator {
+  + void validate(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class EntRefValidator implements IValidator {
+  + void validate(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class StmtRefAndStmtRefValidator implements IValidator {
+  + void validate(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class StmtRefValidator implements IValidator {
+  + void validate(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class PatternClauseValidator implements IValidator {
+  + void validate(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class PatternCondValidator implements IValidator {
+  + void validate(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class PatternValidator implements IValidator {
+  + void validate(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class ExpressionSpecValidator implements IValidator {
+  + void validate(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class ExpressionValidator implements IValidator {
+  + void validate(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class TermValidator implements IValidator {
+  + void validate(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class FactorValidator implements IValidator {
+  + void validate(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class WithClauseValidator implements IValidator {
+  + void validate(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class AttrCondValidator implements IValidator {
+  + void validate(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class AttrCompareValidator implements IValidator {
+  + void validate(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class RefValidator implements IValidator {
+  + void validate(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+class AttrRefValidator implements IValidator {
+  + void validate(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end)
+}
+
+
+class SemanticValidator implements IValidator {
+  - std::unordered_map<std::string, std::unordered_set<std::string>> validAttrNames
+  - const std::unordered_set<std::string> nonClauseValues
+  + void validate(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end)
+  - void validateDeclaration(std::vector<std::shared_ptr<Token>>::iterator& it, std::unordered_map<std::string, std::string>& synonymTypeMap)
+  - void validateSelect(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end, std::unordered_map<std::string, std::string>& synonymTypeMap)
+  - void validateSingleSelect(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end, std::unordered_map<std::string, std::string>& synonymTypeMap)
+  - void validateTupleSelect(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end, std::unordered_map<std::string, std::string>& synonymTypeMap)
+  - void validateBooleanSelect(std::vector<std::shared_ptr<Token>>::iterator& it)
+  - void validateClause(std::vector<std::shared_ptr<Token>>::iterator& it, const std::vector<std::shared_ptr<Token>>::iterator& end, std::unordered_map<std::string, std::string>& synonymTypeMap)
+  - void validateSuchThat(std::vector<std::shared_ptr<Token>>::iterator& it, std::unordered_map<std::string, std::string>& synonymTypeMap)
+  - void validatePattern(std::vector<std::shared_ptr<Token>>::iterator& it, std::unordered_map<std::string, std::string>& synonymTypeMap)
+  - void consumeRemainingPatternFromSecondArg(std::string& synType, std::vector<std::shared_ptr<Token>>::iterator& it)
+  - void consumeIfPatternFromSecondArg(std::vector<std::shared_ptr<Token>>::iterator& it)
+  - void consumeWhilePatternFromSecondArg(std::vector<std::shared_ptr<Token>>::iterator& it)
+  - void consumeAssignPatternFromSecondArg(std::vector<std::shared_ptr<Token>>::iterator& it)
+  - void validateWith(std::vector<std::shared_ptr<Token>>::iterator& it, std::unordered_map<std::string, std::string>& synonymTypeMap)
+  - bool isQuotedEntity(std::vector<std::shared_ptr<Token>>::iterator& it)
+  - bool isSynonym(std::vector<std::shared_ptr<Token>>::iterator& it)
+  - void throwErrorIfDuplicate(std::unordered_map<std::string, std::string>& synonymTypeMap, std::vector<std::shared_ptr<Token>>::iterator& it)
+  - void throwErrorIfNotDeclared(std::unordered_map<std::string, std::string>& synonymTypeMap, std::vector<std::shared_ptr<Token>>::iterator& it)
+  - void throwErrorIfWildcard(std::vector<std::shared_ptr<Token>>::iterator& it)
+  - void throwErrorIfNotProcedure(std::unordered_map<std::string, std::string>& synonymTypeMap, std::vector<std::shared_ptr<Token>>::iterator& it)
+  - void throwErrorIfNotStmt(std::unordered_map<std::string, std::string>& synonymTypeMap, std::vector<std::shared_ptr<Token>>::iterator& it)
+  - void throwErrorIfNotProcedureOrStmt(std::unordered_map<std::string, std::string>& synonymTypeMap, std::vector<std::shared_ptr<Token>>::iterator& it)
+  - void throwErrorIfNotVariable(std::unordered_map<std::string, std::string>& synonymTypeMap, std::vector<std::shared_ptr<Token>>::iterator& it)
+  - void throwErrorIfPatternArg1NotVariable(std::unordered_map<std::string, std::string>& synonymTypeMap, std::vector<std::shared_ptr<Token>>::iterator& it)
+  - void throwErrorIfAttrNameInvalid(std::unordered_map<std::string, std::string>& synonymTypeMap, std::string synonym, std::string attrName)
+  - std::string getSynonymType(std::unordered_map<std::string, std::string>& synonymTypeMap, std::vector<std::shared_ptr<Token>>::iterator& it)
+}
+
+Validator --> SyntaxValidator
+SyntaxValidator --> DeclarationListValidator
+SyntaxValidator --> SelectResultClauseValidator
+SyntaxValidator --> ClauseListValidator
+
+DeclarationListValidator --> DeclarationValidator
+SelectResultClauseValidator --> TupleValidator
+SelectResultClauseValidator --> TupleElemValidator
+
+ClauseListValidator --> SuchThatClauseValidator
+ClauseListValidator --> PatternClauseValidator
+ClauseListValidator --> WithClauseValidator
+
+SuchThatClauseValidator --> RelCondValidator
+RelCondValidator --> RelRefValidator
+RelRefValidator --> EntRefOrStmtRefAndEntRefValidator
+EntRefOrStmtRefAndEntRefValidator --> EntOrStmtRefValidator
+EntRefOrStmtRefAndEntRefValidator --> EntRefValidator
+
+RelRefValidator --> StmtRefAndStmtRefValidator
+StmtRefAndStmtRefValidator --> StmtRefValidator
+
+PatternClauseValidator --> PatternCondValidator
+PatternCondValidator --> PatternValidator
+PatternValidator --> EntRefValidator
+PatternValidator --> ExpressionSpecValidator
+ExpressionSpecValidator --> ExpressionValidator
+ExpressionValidator --> TermValidator
+TermValidator --> FactorValidator
+FactorValidator --> ExpressionValidator
+
+WithClauseValidator --> AttrCondValidator
+AttrCondValidator --> AttrCompareValidator
+AttrCompareValidator --> RefValidator
+RefValidator --> AttrRefValidator
+
+Validator --> SemanticValidator
+@enduml

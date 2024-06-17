@@ -1,0 +1,95 @@
+1 - Next*(int, stmt)
+stmt s;
+Select s such that not Next*(1, s)
+1
+5000
+2 - Next*(int, if), subset of stmt
+if ifs;
+Select ifs such that not Next*(2, ifs)
+none
+5000
+3 - Next*(while, int)
+while w;
+Select w such that not Next*(w, 4)
+12
+5000
+4 - Next*(_,call)
+call c;
+Select c such that not Next*(_, c)
+none
+5000
+5 - Next*(print, _)
+print p;
+Select p such that not Next*(p, _)
+23
+5000
+6 - Next*(print, while), two different stmt subsets
+print p; while w;
+Select p such that not Next*(p, w)
+16, 19, 23
+5000
+7 - Next*(int, _)
+print p;
+Select BOOLEAN such that not Next*(6, _)
+FALSE
+5000
+8 - Next*(_, int)
+assign a;
+Select BOOLEAN such that not Next*(_, 1)
+TRUE
+5000
+9 - Next*(_, _)
+stmt s;
+Select BOOLEAN such that not Next*(_, _)
+FALSE
+5000
+10 - Next*(int, int)
+stmt s;
+Select BOOLEAN such that not Next*(2, 3)
+FALSE
+5000
+11 - Next*(int, int)
+stmt s;
+Select BOOLEAN such that not Next*(3, 4)
+FALSE
+5000
+12 - Next*(int, int)
+stmt s;
+Select BOOLEAN such that not Next*(3, 7)
+FALSE
+5000
+13 - Next*(int, int)
+stmt s;
+Select BOOLEAN such that not Next*(5, 6)
+FALSE
+5000
+14 - Next*(int, int)
+stmt s;
+Select BOOLEAN such that not Next*(7, 9)
+FALSE
+5000
+15 - Next*(int, int)
+stmt s;
+Select BOOLEAN such that not Next*(8, 10)
+FALSE
+5000
+16 - Next*(int, int)
+stmt s;
+Select BOOLEAN such that not Next*(6, 4)
+FALSE
+5000
+17 - Next*(int, int)
+stmt s;
+Select BOOLEAN such that not Next*(10, 9)
+TRUE
+5000
+18 - Next*(stmt, stmt), same synonym
+stmt s;
+Select s such that not Next*(s, s)
+1, 2, 10, 11, 16, 17, 18, 19, 20, 21, 22, 23
+5000
+19 - Next*(stmt1, stmt2) and Next*(stmt2, stmt1)
+stmt s1, s2;
+Select s1 such that not Next*(s1, s2) such that not Next*(s2, s1)
+1, 2, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23
+5000

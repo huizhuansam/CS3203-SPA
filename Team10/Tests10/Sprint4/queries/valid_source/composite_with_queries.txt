@@ -1,0 +1,65 @@
+1 - procedure.procName
+procedure p;
+Select p such that Uses(p, _) with p.procName = "null"
+null
+5000
+2 - call.procName
+call c; assign a; procedure p;
+Select c such that Follows(c, a) with c.procName = p.procName
+29
+5000
+3 - variable.varName
+variable v; read r;
+Select r such that Modifies(r, v) with v.varName = "abcd"
+27
+5000
+4 - read.varName
+read r;
+Select r such that Modifies(r, _) with r.varName = "first"
+2
+5000
+5 - print.varName
+print p;
+Select p such that Uses(p, _) with p.varName = "f1fth"
+14
+5000
+6 - constant.value
+constant c; read r;
+Select c such that Modifies(r, "first") with c.value = r.stmt#
+2
+5000
+7 - stmt.stmt#
+stmt s; print p;
+Select s such that Uses(s, "a") with s.stmt# = p.stmt#
+4
+5000
+8 - read.stmt#
+read r; variable v;
+Select v such that Modifies(r, v) with r.stmt# = 12
+second
+5000
+9 - print.stmt#
+print p; variable v;
+Select v such that Uses(p, v) with p.stmt# = 16
+bc
+5000
+10 - call.stmt#
+call c; variable v;
+Select v such that Modifies(c, v) with c.stmt# = 26
+abcd
+5000
+11 - while.stmt#
+while w; variable v;
+Select v pattern w (v, _) with w.stmt# = 5
+a, b, c
+5000
+12 - if.stmt#
+if i; variable v;
+Select v pattern i (v, _, _) with i.stmt# = 9
+fifth, third
+5000
+13 - assign.stmt#
+assign a; variable v;
+Select v pattern a (v, _) with a.stmt# = 17
+a
+5000

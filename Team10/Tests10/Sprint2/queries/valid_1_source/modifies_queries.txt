@@ -1,0 +1,40 @@
+1 - Check that statement 1 modifies a variable
+stmt s;
+Select s such that Modifies(1, _)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
+5000
+2 - Check that statement 16 modifies a variable -- NEGATIVE CASE
+stmt s;
+Select s such that Modifies(16, _)
+none
+5000
+3 - Select the variable that statement 1 modifies
+stmt s; variable v;
+Select v such that Modifies(1, v)
+number
+5000
+4 - Select the variable that statement 16 modifies -- NEGATIVE CASE
+stmt s; variable v;
+Select v such that Modifies(16, v)
+none
+5000
+5 - Select all statements that modifies a variable
+stmt s;
+Select s such that Modifies(s, _)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15
+5000
+6 - Select all variables that get modified
+stmt s; variable v;
+Select v such that Modifies(s, v)
+number, sum, digit, a, b, c, tracer, cry, money
+5000
+7 - Select all statements that modify the variable number
+stmt s;
+Select s such that Modifies(s, "number")
+1, 3, 6
+5000
+8 - Select all statements that modify the variable hello -- NEGATIVE CASE
+stmt s;
+Select s such that Modifies(s, "hello")
+none
+5000

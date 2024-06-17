@@ -1,0 +1,25 @@
+procedure sumDigits {
+    read number; // 1
+    sum = 0;     // 2
+    while (number > 0) { // 3
+        digit = number % 10; // 4
+        sum = sum + digit; // 5
+        number = number / 10; // 6
+    }
+
+    if (sum % 2 == 0) then { //7
+        a = x + 1;  //8
+        b = number * bazooka; // 9
+        print number28; //10
+    } else {
+       read c; //11
+       tracer = 20 / c + toilet - (tiktok % jobs) * birb; // 12
+       if (jobs < 0) then { // 13
+          cry = 100; // 14
+       } else {
+          money = money * 5000; // 15
+       }
+    }
+
+    print sum;  //16
+}

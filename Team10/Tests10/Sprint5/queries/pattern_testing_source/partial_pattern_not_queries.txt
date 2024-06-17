@@ -1,0 +1,95 @@
+1 - a( _ , _ )
+assign a;
+Select a pattern not a(_, _)
+none
+5000
+2 - Negative case
+assign a;
+Select a pattern not a(_, _"hello"_)
+1, 2, 3, 4, 5, 6, 7
+5000
+3 - Testing a(v, _exp_)
+assign a;
+Select a pattern not a(_, _"boom"_)
+1, 2, 3, 4, 5, 7
+5000
+4 - Testing a( _ , _exp_) and check for case sensitivity
+assign a;
+Select a pattern not a(_, _"c"_)
+2, 3, 4, 5, 6, 7
+5000
+5 - Testing a( _ , _exp_) and check for case sensitivity
+assign a;
+Select a pattern not a(_, _"C"_)
+1, 3, 4, 5, 6, 7
+5000
+6 - Testing a(v, _)
+assign a; variable v;
+Select v pattern not a(v, _)
+boom, B, b, c, d, e, C, E, x, y, z, long, doctor, F, f, a
+5000
+7 - Testing a(v, _exp_)
+assign a; variable v;
+Select v pattern not a(v, _"y"_)
+boom, B, b, c, d, e, C, E, x, y, z, long, doctor, F, f, a
+5000
+8 - Testing a(v, _exp_)
+assign a; variable v;
+Select v pattern not a(v, _"f"_)
+boom, B, b, c, d, e, C, E, x, y, z, long, doctor, F, f, a
+5000
+9 - Testing a(x, _ )
+assign a;
+Select a pattern not a("a", _)
+3, 4, 5, 6, 7
+5000
+10 - Testing a(x, _ ) and check for case sensitivity
+assign a;
+Select a pattern not a("A", _)
+1, 2, 3, 4, 5, 6, 7
+5000
+11 - Testing a(x, _ )
+assign a;
+Select a pattern not a("f", _)
+1, 2, 5, 6, 7
+5000
+12 - Testing a(x, _exp_)
+assign a;
+Select a pattern not a("a", _"(d % e)"_)
+2, 3, 4, 5, 6, 7
+5000
+13 - Testing a(x, _exp_) and check left associativity
+assign a;
+Select a pattern not a("f", _"y + z"_)
+1, 2, 3, 5, 6, 7
+5000
+14 - Check left associativity
+assign a;
+Select a pattern not a( _, _"y + z"_)
+1, 2, 3, 6, 7
+5000
+15 - Long expression partial matching check
+assign a;
+Select a pattern not a(_, _"(a / 2) * b"_)
+1, 2, 3, 4, 5, 6
+5000
+16 - Long expression partial matching check
+assign a;
+Select a pattern not a(_, _"x + y * 5 - z"_)
+1, 2, 3, 4, 5, 6
+5000
+17 - Long expression partial matching check
+assign a;
+Select a pattern not a(_, _"(x + (y * 5)) - z"_)
+1, 2, 3, 4, 5, 6
+5000
+18 - Long expression partial matching check, wrong order
+assign a;
+Select a pattern not a(_, _"x + (y * 5 - z)"_)
+1, 2, 3, 4, 5, 6, 7
+5000
+19 - Missing bracket
+assign a;
+Select a pattern not a(_, _"(a / 2"_)
+SyntaxError
+5000

@@ -1,0 +1,100 @@
+1 - Boolean clauses, all true
+variable v;
+Select BOOLEAN such that not Modifies(3,"a") such that not Parent(9,12)
+FALSE
+5000
+2 - Boolean clauses, all false
+variable v;
+Select BOOLEAN such that not Uses(4,"b") such that not Follows(23,24)
+FALSE
+5000
+3 - Boolean clauses, true + false
+variable v;
+Select BOOLEAN such that not Follows*(19,22) such that not Parent(8,18)
+FALSE
+5000
+4 - Boolean clauses, false + true
+variable v;
+Select BOOLEAN such that not Follows*(19,22) such that not Parent(8,18)
+FALSE
+5000
+5 - Non-boolean clauses, non-empty results
+variable v; assign a;
+Select BOOLEAN such that not Modifies(a, v) pattern a ("c", _)
+TRUE
+5000
+6 - Non-boolean clauses, non-empty results
+variable v; assign a;
+Select BOOLEAN such that Modifies(a, v) pattern not  a ("c", _)
+TRUE
+5000
+7 - Non-boolean clauses, non-empty results
+variable v; assign a; stmt s;
+Select BOOLEAN such that not Uses(s, v) pattern a ("c", _)
+TRUE
+5000
+8 - Non-boolean clauses, non-empty results
+variable v; assign a; stmt s;
+Select BOOLEAN such that Uses(s, v) pattern not  a ("c", _)
+TRUE
+5000
+9 - Non-boolean clauses, empty pattern results
+variable v; assign a, a1;
+Select BOOLEAN such that not Modifies(a, v) pattern a1 ("s", _)
+FALSE
+5000
+10 - Non-boolean clauses, empty pattern results
+variable v; assign a, a1;
+Select BOOLEAN such that Modifies(a, v) pattern not a1 ("s", _)
+TRUE
+5000
+11 - Non-boolean clauses, empty results
+variable v; assign a;
+Select BOOLEAN such that not Modifies(23, v) pattern a ("s", _)
+FALSE
+5000
+12 - Non-boolean clauses, empty results
+variable v; assign a;
+Select BOOLEAN such that Modifies(23, v) pattern not a ("s", _)
+FALSE
+5000
+13 - Mix clauses, true + non-empty result
+variable v; assign a;
+Select BOOLEAN such that not Modifies(13, "a") pattern a ("c", _)
+FALSE
+5000
+14 - Mix clauses, true + non-empty result
+variable v; assign a;
+Select BOOLEAN such that Modifies(13, "a") pattern not a ("c", _)
+TRUE
+5000
+15 - Mix clauses, true + empty result
+variable v; assign a;
+Select BOOLEAN such that not Modifies(13, "a") pattern a ("s", _)
+FALSE
+5000
+16 - Mix clauses, true + empty result
+variable v; assign a;
+Select BOOLEAN such that Modifies(13, "a") pattern not a ("s", _)
+TRUE
+5000
+17 - Mix clauses, false + non-empty result
+variable v; assign a;
+Select BOOLEAN such that not Modifies(14, "a") pattern a ("b", _)
+TRUE
+5000
+18 - Mix clauses, false + non-empty result
+variable v; assign a;
+Select BOOLEAN such that Modifies(14, "a") pattern not a ("b", _)
+FALSE
+5000
+19 - Mix clauses, false + empty result
+variable v; assign a;
+Select BOOLEAN such that not Modifies(14, "a") pattern a ("B", _)
+FALSE
+5000
+20 - Mix clauses, false + empty result
+variable v; assign a;
+Select BOOLEAN such that Modifies(14, "a") pattern not a ("B", _)
+FALSE
+5000

@@ -1,0 +1,195 @@
+1 - Calls (synonym, synonym), get first synonym
+procedure p1, p2;
+Select p1 such that not Calls (p1, p2)
+one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve
+5000
+2 - Calls (synonym, synonym), get second synonym
+procedure p1, p2;
+Select p2 such that not Calls (p1, p2)
+one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve
+5000
+3 - Calls (synonym, ident)
+procedure p;
+Select p such that not Calls (p, "five")
+three, four, five, six, seven, eight, nine, eleven, twelve
+5000
+4 - Calls (synonym, ident) none returned, non-existent proc
+procedure p;
+Select p such that not Calls (p, "invalid")
+one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve
+5000
+5 - Calls (synonym, ident) none returned, existing proc
+procedure p;
+Select p such that not Calls (p, "first")
+one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve
+5000
+6 - Calls (synonym, wildcard)
+procedure p;
+Select p such that not Calls (p, _)
+five, nine, eleven
+5000
+7 - Calls (ident, synonym)
+procedure p;
+Select p such that not Calls("one", p)
+one, three, four, six, seven, eight, nine, ten, eleven, twelve
+5000
+8 - Calls (ident, synonym) none returned, existing proc
+procedure p;
+Select p such that not Calls("nine", p)
+one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve
+5000
+9 - Calls (ident, synonym) none returned, non-existent proc
+procedure p;
+Select p such that not Calls("invalid", p)
+one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve
+5000
+10 - Calls (ident, ident)
+procedure p;
+Select p such that not Calls("one", "two")
+none
+5000
+11 - Calls (ident, ident) none returned, existing proc
+procedure p;
+Select p such that not Calls("two", "one")
+one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve
+5000
+12 - Calls (ident, ident) none returned, indirectly calls
+procedure p;
+Select p such that not Calls("one", "three")
+one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve
+5000
+13 - Calls (ident, ident) none returned, non-existent proc
+procedure p;
+Select p such that not Calls("invalid", "two")
+one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve
+5000
+14 - Calls (ident, wildcard)
+procedure p;
+Select p such that not Calls("one", _)
+none
+5000
+15 - Calls (ident, wildcard) none returned, existing proc
+procedure p;
+Select p such that not Calls("eleven", _)
+one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve
+5000
+16 - Calls (ident, wildcard) none returned
+procedure p;
+Select p such that not Calls("invalid", _)
+one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve
+5000
+17 - Calls (wildcard, synonym)
+procedure p;
+Select p such that not Calls(_, p)
+one, four, seven, ten
+5000
+18 - Calls (wildcard, wildcard)
+procedure p;
+Select p such that not Calls(_, _)
+none
+5000
+19 - Calls* (synonym, synonym), get first synonym
+procedure p1, p2;
+Select p1 such that not Calls* (p1, p2)
+one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve
+5000
+20 - Calls* (synonym, synonym), get second synonym
+procedure p1, p2;
+Select p2 such that not Calls* (p1, p2)
+one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve
+5000
+21 - Calls* (synonym, ident)
+procedure p;
+Select p such that not Calls* (p, "six")
+five, six, eight, nine, eleven, twelve
+5000
+22 - Calls* (synonym, ident) none returned, non-existent proc
+procedure p;
+Select p such that not Calls* (p, "invalid")
+one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve
+5000
+23 - Calls* (synonym, ident) none returned, existing proc
+procedure p;
+Select p such that not Calls* (p, "one")
+one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve
+5000
+24 - Calls* (synonym, wildcard)
+procedure p;
+Select p such that not Calls* (p, _)
+five, nine, eleven
+5000
+25 - Calls* (ident, synonym)
+procedure p;
+Select p such that not Calls*("one", p)
+one, four, seven, ten
+5000
+26 - Calls* (ident, synonym) none returned, existing proc
+procedure p;
+Select p such that not Calls*("nine", p)
+one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve
+5000
+27 - Calls* (ident, synonym) none returned, non-existent proc
+procedure p;
+Select p such that not Calls*("invalid", p)
+one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve
+5000
+28 - Calls* (ident, ident), direct call
+procedure p;
+Select p such that not Calls*("one", "two")
+none
+5000
+29 - Calls* (ident, ident), indirect call
+procedure p;
+Select p such that not Calls*("one", "three")
+none
+5000
+30 - Calls* (ident, ident) none returned, existing proc
+procedure p;
+Select p such that not Calls*("second", "first")
+one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve
+5000
+31 - Calls* (ident, ident) none returned, non-existent proc
+procedure p;
+Select p such that not Calls*("invalid", "first")
+one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve
+5000
+32 - Calls* (ident, wildcard)
+procedure p;
+Select p such that not Calls*("one", _)
+none
+5000
+33 - Calls* (ident, wildcard) none returned, existing proc
+procedure p;
+Select p such that not Calls*("five", _)
+one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve
+5000
+34 - Calls* (ident, wildcard) none returned, non-existing proc
+procedure p;
+Select p such that not Calls*("invalid", _)
+one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve
+5000
+35 - Calls* (wildcard, synonym)
+procedure p;
+Select p such that not Calls*(_, p)
+one, four, seven, ten
+5000
+36 - Calls* (wildcard, wildcard)
+procedure p;
+Select p such that not Calls*(_, _)
+none
+5000
+37 - Calls* (ident, ident), direct call, weird spacing
+procedure p;
+Select p such that not Calls*("     one  ", " two              ")
+none
+5000
+38 - Calls* (ident, ident), indirect call, weird spacing
+procedure p;
+Select p such that not Calls*("     one   ", "        six  ")
+none
+5000
+39 - Calls* (ident, ident), invalid direct call, weird spacing
+procedure p;
+Select p such that not Calls*("     two  ", " one              ")
+one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve
+5000

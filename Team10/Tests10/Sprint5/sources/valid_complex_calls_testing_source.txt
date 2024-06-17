@@ -1,0 +1,55 @@
+procedure one {
+    call two;
+    call five;
+}
+
+procedure two {
+    call three;
+    call five;
+}
+
+procedure three {
+    call six;
+}
+
+procedure four {
+    call three;
+    call two;
+}
+
+procedure five {
+    print five;
+}
+
+procedure six {
+    call eight;
+    call nine;
+    call twelve;
+}
+
+procedure seven {
+    call six;
+    call eleven;
+}
+
+procedure eight {
+    call nine;
+}
+
+procedure nine {
+    print nine;
+}
+
+procedure ten {
+    call six;
+    call five;
+}
+
+procedure eleven {
+    print eleven;
+}
+
+procedure twelve {
+    call eleven;
+    call eight;
+}

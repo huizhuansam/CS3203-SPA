@@ -1,0 +1,40 @@
+1 - synonym + wildcard
+while w; variable v;
+Select <w, v> pattern w (v, _)
+2 a, 3 b, 3 c, 8 d, 10 c
+5000
+2 - ident + wildcard, where this ident only used once
+while w;
+Select w pattern w ("a", _)
+2
+5000
+3 - ident + wildcard, where this ident is deeply nested
+while w;
+Select w pattern w ("c", _)
+3,10
+5000
+4 - ident + wildcard, where ident not used in while statement
+while w;
+Select w pattern w ("notMe", _)
+none
+5000
+5 - ident + wildcard, where this ident is used in complex condition
+while w;
+Select w pattern w ("d", _)
+8
+5000
+6 - ident + wildcard, where this ident multiple places
+while w;
+Select w pattern w ("c", _)
+3, 10
+5000
+7 - wildcard + wildcard
+while w; variable v;
+Select w pattern w (_, _)
+2,3,8,10
+5000
+8 - negate while pattern
+while w;
+Select w pattern not w(_,_)
+5
+5000

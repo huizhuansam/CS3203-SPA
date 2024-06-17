@@ -1,0 +1,31 @@
+procedure if {
+    if (a == b) then {                      #1
+        if (b == c) then {                  #2
+            if = 8;                         #3
+            if (test == if) then {          #4
+                a = b + c * x;              #5
+                if (if == c) then {         #6
+                    x = y;                  #7
+                } else {
+                    y = x +1;               #8
+                }
+            } else {
+                y = x * 2;                  #9
+            }
+        } else {
+            while = 0;                      #10
+            c = a * b;                      #11
+        }
+    } else {
+        if = a * b *c;                      #12
+    }
+    while (c > 10) {                        #13
+        if (c == 14) then {                 #14
+            a = b;                          #15
+            c = c - 1;                      #16
+        } else {
+            c = c-1;                        #17
+            c=if*while+a;                   #18
+        }
+    }
+}

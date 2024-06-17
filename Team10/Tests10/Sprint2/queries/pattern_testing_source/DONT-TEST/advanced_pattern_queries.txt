@@ -1,0 +1,90 @@
+1 - a( _ , _ )
+assign a;
+Select a pattern a(_, _)
+1, 2, 3, 4, 5, 6, 7
+5000
+2 - Negative case
+assign a;
+Select a pattern a(_, "hello")
+none
+5000
+3 - Testing a(v, _exp_)
+assign a;
+Select a pattern a(_, _"boom"_)
+5
+5000
+4 - Testing a( _ , _exp_) and check for case sensitivity
+assign a;
+Select a pattern a(_, _"c"_)
+1
+5000
+5 - Testing a( _ , _exp_) and check for case sensitivity
+assign a;
+Select a pattern a(_, _"C"_)
+2
+5000
+6 - Testing a(v, _)
+assign a; variable v;
+Select v pattern a(v, _)
+a, f, F, doctor
+5000
+7 - Testing a(v, _exp_)
+assign a; variable v;
+Select v pattern a(v, _"y"_)
+f, F, long
+5000
+8 - Testing a(v, _exp_)
+assign a; variable v;
+Select v pattern a(v, _"f"_)
+a
+5000
+9 - Testing a(x, _ )
+assign a;
+Select a pattern a("a", _)
+1, 2
+5000
+10 - Testing a(x, _ ) and check for case sensitivity
+assign a;
+Select a pattern a("A", _)
+none
+5000
+11 - Testing a(x, _ )
+assign a;
+Select a pattern a("f", _)
+3, 4
+5000
+12 - Testing a(x, _exp_)
+assign a;
+Select a pattern a("a", _"(d %"_)
+1, 2
+5000
+13 - Testing a(x, _exp_) and check left associativity
+assign a;
+Select a pattern a("f", _"y + z"_)
+4
+5000
+14 - Check left associativity
+assign a;
+Select a pattern a(_, _"y + z"_)
+4, 5
+5000
+15 - Long expression partial matching check
+assign a;
+Select a pattern a(_, _"(a / 2) * b"_)
+7
+5000
+16 - Long expression partial matching check
+assign a;
+Select a pattern a(_, _"(y * 5) - z + (a / 2) * b"_)
+7
+5000
+17 - Long expression partial matching check
+assign a;
+Select a pattern a(_, _"((y * 5) - z) + (a / 2) * b"_)
+7
+5000
+18 - Long expression partial matching check
+assign a;
+Select a pattern a(_, _"((y * 5) - z) + ((a / 2) * b)"_)
+7
+5000

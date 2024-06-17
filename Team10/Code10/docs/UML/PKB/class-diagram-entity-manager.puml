@@ -1,0 +1,44 @@
+@startuml
+class EntitySetStore<T> {
+- set: std::unordered_set<T>
++ insert(const T& element): void
++ getAll(): std::unordered_set<T>
++ clear(): void
+}
+
+class StatementStore {
+- statements: std::unordered_map<StatementType, std::unordered_set<int>>
++ addStatement(StatementType type, int stmtNo): void
++ getStatements(): std::unordered_set<int> 
++ getAssigns(): std::unordered_set<int> 
++ getReads(): std::unordered_set<int> 
++ getPrints(): std::unordered_set<int> 
++ getCalls(): std::unordered_set<int> 
++ getWhiles(): std::unordered_set<int> 
++ getIfs(): std::unordered_set<int> 
++ clear(): void
+}
+
+class EntityManager {
+ - varStore: EntitySetStore<std::string>
+ - constStore: EntitySetStore<std::string>
+ - procStore: EntitySetStore<std::string>
+ - stmtStore: StatementStore
+ - callsProcStore: TwoWayMapManager<int, std::string>
+ - printsVarStore: TwoWayMapManager<int, std::string>
+ - readsVarStore: TwoWayMapManager<int, std::string>
+}
+
+class TwoWayMapManager<K, V> {
+ # leftToRightMap: std::unordered_map<K, std::vector<V>>
+ # rightToLeftMap: std::unordered_map<V, std::vector<K>>
+ # leftSet: std::unordered_set<K>
+ # rightSet: std::unordered_set<V>
+}
+
+
+EntityManager *-- EntitySetStore
+EntityManager *-- StatementStore
+EntityManager *-- TwoWayMapManager
+
+@enduml

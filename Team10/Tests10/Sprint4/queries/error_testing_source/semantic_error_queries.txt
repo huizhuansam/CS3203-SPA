@@ -1,0 +1,385 @@
+1 - Uses 1st arg cannot be _
+variable v;
+Select v such that Uses(_, v)
+SemanticError
+5000
+2 - Modifies 1st arg cannot be _
+variable v;
+Select v such that Modifies(_, v)
+SemanticError
+5000
+3 - Variable cannot be a synonym in first arg of Follows
+variable v;
+Select v such that Follows(v, 1)
+SemanticError
+5000
+4 - Constant cannot be a synonym in first arg of Follows
+constant c;
+Select c such that Follows(c, 1)
+SemanticError
+5000
+5 - Procedure cannot be a synonym in first arg of Follows
+procedure p;
+Select p such that Follows(p, 1)
+SemanticError
+5000
+6 - Variable cannot be a synonym in first arg of Follows*
+variable v;
+Select v such that Follows*(v, 1)
+SemanticError
+5000
+7 - Constant cannot be a synonym in first arg of Follows*
+constant c;
+Select c such that Follows*(c, 1)
+SemanticError
+5000
+8 - Procedure cannot be a synonym in first arg of Follows*
+procedure p;
+Select p such that Follows*(p, 1)
+SemanticError
+5000
+9 - Variable cannot be a synonym in first arg of Parent
+variable v;
+Select v such that Parent(v, 1)
+SemanticError
+5000
+10 - Constant cannot be a synonym in first arg of Parent
+constant c;
+Select c such that Parent(c, 1)
+SemanticError
+5000
+12 - Procedure cannot be a synonym in first arg of Parent
+procedure p;
+Select p such that Parent(p, 1)
+SemanticError
+5000
+13 - Variable cannot be a synonym in first arg of Parent*
+variable v;
+Select v such that Parent(v, 1)
+SemanticError
+5000
+14 - Constant cannot be a synonym in first arg of Parent*
+constant c;
+Select c such that Parent*(c, 1)
+SemanticError
+5000
+15 - Procedure cannot be a synonym in first arg of Parent*
+procedure p;
+Select p such that Parent*(p, 1)
+SemanticError
+5000
+16 - Variable cannot be a synonym in first arg of Modifies
+variable v;
+Select v such that Modifies(v, "test")
+SemanticError
+5000
+17 - Constant cannot be a synonym in first arg of Modifies
+constant c;
+Select c such that Modifies(c, "test")
+SemanticError
+5000
+18 - Constant cannot be a synonym in second arg of Modifies
+constant c;
+Select c such that Modifies(1, c)
+SemanticError
+5000
+19 - Procedure cannot be a synonym in second arg of Modifies
+procedure p;
+Select p such that Modifies(1, p)
+SemanticError
+5000
+20 - Statement cannot be a synonym in second arg of Modifies
+stmt s;
+Select s such that Modifies(1, s)
+SemanticError
+5000
+21 - Read cannot be a synonym in second arg of Modifies
+read r;
+Select r such that Modifies(1, r)
+SemanticError
+5000
+22 - Print cannot be a synonym in second arg of Modifies
+print pn;
+Select pn such that Modifies(1, pn)
+SemanticError
+5000
+23 - Assign cannot be a synonym in second arg of Modifies
+assign a;
+Select a such that Modifies(1, a)
+SemanticError
+5000
+24 - While cannot be a synonym in second arg of Modifies
+while w;
+Select w such that Modifies(1, w)
+SemanticError
+5000
+25 - If cannot be a synonym in second arg of Modifies
+if ifs;
+Select ifs such that Modifies(1, ifs)
+SemanticError
+5000
+26 - Variable cannot be a synonym in first arg of Uses
+variable v;
+Select v such that Uses(v, "test")
+SemanticError
+5000
+27 - Constant cannot be a synonym in first arg of Uses
+constant c;
+Select c such that Uses(c, "test")
+SemanticError
+5000
+28 - Constant cannot be a synonym in second arg of Uses
+constant c;
+Select c such that Uses(1, c)
+SemanticError
+5000
+29 - Procedure cannot be a synonym in second arg of Uses
+procedure p;
+Select p such that Uses(1, p)
+SemanticError
+5000
+30 - Statement cannot be a synonym in second arg of Uses
+stmt s;
+Select s such that Uses(1, s)
+SemanticError
+5000
+31 - Read cannot be a synonym in second arg of Uses
+read r;
+Select r such that Uses(1, r)
+SemanticError
+5000
+32 - Print cannot be a synonym in second arg of Uses
+print pn;
+Select pn such that Uses(1, pn)
+SemanticError
+5000
+33 - Assign cannot be a synonym in second arg of Uses
+assign a;
+Select a such that Uses(1, a)
+SemanticError
+5000
+34 - While cannot be a synonym in second arg of Uses
+while w;
+Select w such that Uses(1, w)
+SemanticError
+5000
+35 - If cannot be a synonym in second arg of Uses
+if ifs;
+Select ifs such that Uses(1, ifs)
+SemanticError
+5000
+36 - Procedure cannot be synonym in first arg of pattern
+assign a; procedure p;
+Select a pattern a(p, _)
+SemanticError
+5000
+37 - Statement cannot be synonym in first arg of pattern
+assign a; stmt s;
+Select a pattern a(s, _)
+SemanticError
+5000
+38 - Read cannot be synonym in first arg of pattern
+assign a; read r;
+Select a pattern a(r, _)
+SemanticError
+5000
+39 - Print cannot be synonym in first arg of pattern
+assign a; print pn;
+Select a pattern a(pn, _)
+SemanticError
+5000
+40 - Assign cannot be synonym in first arg of pattern
+assign a, a1;
+Select a pattern a(a1, _)
+SemanticError
+5000
+41 - While cannot be synonym in first arg of pattern
+assign a; while w;
+Select a pattern a(w, _)
+SemanticError
+5000
+42 - If cannot be synonym in first arg of pattern
+assign a; if ifs;
+Select a pattern a(ifs, _)
+SemanticError
+5000
+43 - Constant cannot be synonym in first arg of pattern
+assign a; constant c;
+Select a pattern a(c, _)
+SemanticError
+5000
+44 - No declaration
+
+Select a pattern a(c, _)
+SemanticError
+5000
+45 - Duplicate synonym declaration
+procedure p; print p;
+Select p
+SemanticError
+5000
+46 - Using undeclared synonym
+variable v;
+Select c
+SemanticError 
+5000
+47 - Calls only takes in procs
+assign p;
+Select p such that Calls (p, _)
+SemanticError
+5000
+48 - Calls* only takes in procs
+variable p;
+Select p such that Calls* (p, _)
+SemanticError
+5000
+49 - With must not have int = string
+print p;
+Select p with 1 = "first"
+SemanticError
+5000
+50 - With must not have string = int
+print p;
+Select p with "first" = 1
+SemanticError
+5000
+51 - Pattern cannot be used for stmt
+stmt s;
+Select s pattern s(_, _)
+SemanticError
+5000
+52 - Pattern cannot be used for read
+read r;
+Select r pattern r(_, _)
+SemanticError
+5000
+53 - Pattern cannot be used for print
+print pn;
+Select pn pattern pn(_, _)
+SemanticError
+5000
+54 - Pattern cannot be used for variable
+variable v;
+Select v pattern v(_, _)
+SemanticError
+5000
+55 - Pattern cannot be used for constant
+constant c;
+Select c pattern c(_, _)
+SemanticError
+5000
+56 - Variable cannot be a synonym in first arg of Next
+variable v;
+Select v such that Next(v, 1)
+SemanticError
+5000
+57 - Constant cannot be a synonym in first arg of Next
+constant c;
+Select c such that Next(c, 1)
+SemanticError
+5000
+58 - Procedure cannot be a synonym in first arg of Next
+procedure p;
+Select p such that Next(p, 1)
+SemanticError
+5000
+59 - Variable cannot be a synonym in first arg of Next*
+variable v;
+Select v such that Next*(v, 1)
+SemanticError
+5000
+60 - Constant cannot be a synonym in first arg of Next*
+constant c;
+Select c such that Next*(c, 1)
+SemanticError
+5000
+61 - Procedure cannot be a synonym in first arg of Next*
+procedure p;
+Select p such that Next*(p, 1)
+SemanticError
+5000
+62 - Variable cannot be a synonym in first arg of Affects
+variable v;
+Select v such that Affects(v, 1)
+SemanticError
+5000
+63 - Constant cannot be a synonym in first arg of Affects
+constant c;
+Select c such that Affects(c, 1)
+SemanticError
+5000
+64 - Procedure cannot be a synonym in first arg of Affects
+procedure p;
+Select p such that Affects(p, 1)
+SemanticError
+5000
+65 - Procedure cannot be synonym in first arg of if pattern
+if i; procedure p;
+Select i pattern i(p, _, _)
+SemanticError
+5000
+66 - Statement cannot be synonym in first arg of if pattern
+if i; stmt s;
+Select i pattern i(s, _, _)
+SemanticError
+5000
+67 - Read cannot be synonym in first arg of if pattern
+if i; read r;
+Select i pattern i(r, _, _)
+SemanticError
+5000
+68 - Print cannot be synonym in first arg of if pattern
+if i; print pn;
+Select i pattern i(pn, _, _)
+SemanticError
+5000
+69 - Assign cannot be synonym in first arg of if pattern
+assign a, a1;
+Select i pattern i(a1, _, _)
+SemanticError
+5000
+70 - While cannot be synonym in first arg of if pattern
+if i; while w;
+Select i pattern i(w, _, _)
+SemanticError
+5000
+71 - If cannot be synonym in first arg of if pattern
+if i; if ifs;
+Select i pattern i(ifs, _, _)
+SemanticError
+5000
+72 - Procedure cannot be synonym in first arg of while pattern
+while w; procedure p;
+Select w pattern w(p,_)
+SemanticError
+5000
+73 - Statement cannot be synonym in first arg of while pattern
+while w; stmt s;
+Select w pattern w(s, _)
+SemanticError
+5000
+74 - Read cannot be synonym in first arg of while pattern
+while w; read r;
+Select w pattern w(r, _)
+SemanticError
+5000
+75 - Print cannot be synonym in first arg of while pattern
+while w; print pn;
+Select w pattern w(pn, _)
+SemanticError
+5000
+76 - Assign cannot be synonym in first arg of while pattern
+assign a, a1;
+Select w pattern w(a, _)
+SemanticError
+5000
+77 - While cannot be synonym in first arg of while pattern
+while w1; while w2;
+Select w1 pattern w1(w2, _)
+SemanticError
+5000
+78 - If cannot be synonym in first arg of while pattern
+while w; if ifs;
+Select w pattern w(ifs, _)
+SemanticError
+5000

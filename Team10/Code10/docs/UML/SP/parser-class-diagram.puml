@@ -1,0 +1,119 @@
+@startuml
+
+class Parser {
+    + void parse(std::vector<std::unique_ptr<Token>>& tokens)
+}
+
+interface IParser {
+    + void parse(std::vector<std::unique_ptr<Token>>::iterator& it, std::vector<std::unique_ptr<Token>>::iterator& end)
+    + void expect(std::vector<std::unique_ptr<Token>>::iterator& it, std::vector<std::unique_ptr<Token>>::iterator& end, TokenType type, std::string& rule)
+    + void consume(std::vector<std::unique_ptr<Token>>::iterator& it, std::vector<std::unique_ptr<Token>>::iterator& end, TokenType type, std::string& rule)
+}
+
+class ProgramParser implements IParser {
+    + void parse(std::vector<std::unique_ptr<Token>>::iterator& it, std::vector<std::unique_ptr<Token>>::iterator& end)
+}
+
+class ProcedureParser implements IParser {
+    - std::string procedureName
+
+    + void parse(std::vector<std::unique_ptr<Token>>::iterator& it, std::vector<std::unique_ptr<Token>>::iterator& end)
+    + std::string getProcedureName()
+}
+
+class StmtLstParser implements IParser {
+    + void parse(std::vector<std::unique_ptr<Token>>::iterator& it, std::vector<std::unique_ptr<Token>>::iterator& end)
+}
+
+class StmtParser implements IParser {
+    + std::unique_ptr<StmtParser> of(std::vector<std::unique_ptr<Token>>::iterator& it, std::vector<std::unique_ptr<Token>>::iterator& end)
+}
+
+class ReadParser extends StmtParser {
+    + void parse(std::vector<std::unique_ptr<Token>>::iterator& it, std::vector<std::unique_ptr<Token>>::iterator& end)
+}
+
+class PrintParser extends StmtParser {
+    + void parse(std::vector<std::unique_ptr<Token>>::iterator& it, std::vector<std::unique_ptr<Token>>::iterator& end)
+}
+
+class CallParser extends StmtParser {
+    + void parse(std::vector<std::unique_ptr<Token>>::iterator& it, std::vector<std::unique_ptr<Token>>::iterator& end)
+}
+
+class WhileParser extends StmtParser {
+    + void parse(std::vector<std::unique_ptr<Token>>::iterator& it, std::vector<std::unique_ptr<Token>>::iterator& end)
+}
+
+class IfParser extends StmtParser {
+    + void parse(std::vector<std::unique_ptr<Token>>::iterator& it, std::vector<std::unique_ptr<Token>>::iterator& end)
+}
+
+class AssignParser extends StmtParser {
+    + void parse(std::vector<std::unique_ptr<Token>>::iterator& it, std::vector<std::unique_ptr<Token>>::iterator& end)
+}
+
+class CondExprParser implements IParser {
+    + void parse(std::vector<std::unique_ptr<Token>>::iterator& it, std::vector<std::unique_ptr<Token>>::iterator& end)
+
+    - void parseNotCondExpr(std::vector<std::unique_ptr<Token>>::iterator& it, std::vector<std::unique_ptr<Token>>::iterator& end);
+
+    - void parseAndOrCondExpr(std::vector<std::unique_ptr<Token>>::iterator& it, std::vector<std::unique_ptr<Token>>::iterator& end);
+
+    - bool isOpenBracketOfCondExpr(std::vector<std::unique_ptr<Token>>::iterator it);
+
+    - void parseRelExpr(std::vector<std::unique_ptr<Token>>::iterator& it, std::vector<std::unique_ptr<Token>>::iterator& end);
+}
+
+class RelExprParser implements IParser {
+    + void parse(std::vector<std::unique_ptr<Token>>::iterator& it, std::vector<std::unique_ptr<Token>>::iterator& end)
+}
+
+class RelFactorParser implements IParser {
+    + void parse(std::vector<std::unique_ptr<Token>>::iterator& it, std::vector<std::unique_ptr<Token>>::iterator& end)
+}
+
+class ExprParser implements IParser {
+    + void parse(std::vector<std::unique_ptr<Token>>::iterator& it, std::vector<std::unique_ptr<Token>>::iterator& end)
+}
+
+class TermParser implements IParser {
+    + void parse(std::vector<std::unique_ptr<Token>>::iterator& it, std::vector<std::unique_ptr<Token>>::iterator& end)
+}
+
+class FactorParser implements IParser {
+    + void parse(std::vector<std::unique_ptr<Token>>::iterator& it, std::vector<std::unique_ptr<Token>>::iterator& end)
+}
+
+class VariableParser implements IParser {
+    + void parse(std::vector<std::unique_ptr<Token>>::iterator& it, std::vector<std::unique_ptr<Token>>::iterator& end)
+}
+
+class ConstantParser implements IParser {
+    + void parse(std::vector<std::unique_ptr<Token>>::iterator& it, std::vector<std::unique_ptr<Token>>::iterator& end)
+}
+
+Parser --> ProgramParser
+ProgramParser --> ProcedureParser
+ProcedureParser --> StmtLstParser
+StmtLstParser --> StmtParser
+
+ReadParser --> VariableParser
+PrintParser --> VariableParser
+WhileParser --> CondExprParser
+WhileParser --> StmtLstParser
+IfParser --> CondExprParser
+IfParser --> StmtLstParser
+AssignParser --> VariableParser
+AssignParser --> ExprParser
+
+CondExprParser --> RelExprParser
+RelExprParser --> RelFactorParser
+RelFactorParser --> ExprParser
+ExprParser --> TermParser
+TermParser --> FactorParser
+FactorParser --> VariableParser
+FactorParser --> ConstantParser
+FactorParser --> ExprParser
+
+@enduml

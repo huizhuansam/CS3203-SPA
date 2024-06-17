@@ -1,0 +1,20 @@
+1 - first argument not variable, ident or wildcard
+if i1; constant c;
+Select i1 pattern i1(c, _, _)
+SemanticError
+5000
+2 - first argument not variable, ident or wildcard
+if i1; procedure p;
+Select i1 pattern i1(p, _, _)
+SemanticError
+5000
+3 - second argument not wildcard
+if i1; while w;
+Select i1 pattern i1(_, w, _)
+SyntaxError
+5000
+3 - third argument not wildcard
+if i1, i2;
+Select i1 pattern i1(_, _, i2)
+SyntaxError
+5000

@@ -1,0 +1,17 @@
+procedure Second {
+    x = 0;              #1
+    i = 5;              #2
+    while (i!=0) {      #3
+        x = x + 2*y;    #4
+        call Third;     #5
+        print i;        #6
+    }
+    if (x==1) then {    #7
+        x = x+1;        #8
+    } else {
+        print z;        #9
+    }
+    z = z + x + i;      #10
+    y = z + 2;          #11
+    x = x * y + z;      #12
+}

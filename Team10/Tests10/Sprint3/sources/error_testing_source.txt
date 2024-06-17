@@ -1,0 +1,10 @@
+procedure test {
+    read a;
+    read b;
+    read none;
+    call fun;
+}
+
+procedure fun {
+    read a;
+}

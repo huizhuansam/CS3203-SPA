@@ -1,0 +1,37 @@
+procedure wiki {
+        x = 0;                  // 1
+        i = 5;                  // 2
+        while (i!=0) {          // 3
+            x = x + 2*y;        // 4
+            a = b;              // 5
+            i = i - 1; }        // 6
+        if (x==1) then {        // 7
+            x = x+1; }          // 8
+          else {                
+            z = 1; }            // 9
+        z = z + x + i;          // 10
+        y = z + 2;              // 11
+        x = x * y + z;          // 12
+}
+
+procedure callBetween {
+	x = 1;                      // 13
+    call helper;                // 14
+    a = x;                      // 15
+}
+
+procedure helper {
+    if ( i != 2 ) then {        // 16
+        x = a + 1; }            // 17
+    else {
+        a = b; }                // 18
+}
+
+procedure readBetween {
+    x = a;                      // 19
+    read x;                     // 20
+    v = x;                      // 21
+
+    read x;                     // 22
+    x = v;                      // 23
+}

@@ -1,0 +1,10 @@
+1 - optimize execution order such that intermediate result is smaller
+stmt s1, s2; while w; variable v;
+Select <s1, s2> such that Next*(s1, s2) and Affects(s1, s2) and Parent(w, s1) pattern w (v, _) with v.varName = "tempF"
+31 33, 31 15, 30 34, 31 31, 30 30, 30 16
+2000
+2 - return early since Modifies(a, "tempG") is not satisfied
+stmt s1, s2; while w; assign a; if i1, i2;
+Select BOOLEAN such that Next*(s1, s2) and Affects(s1, s2) and Parent(w, s1)  and Modifies(a, "tempG")
+FALSE
+1000

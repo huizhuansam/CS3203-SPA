@@ -1,0 +1,104 @@
+@startuml
+class PKB << (S,#FF7700) Singleton >> {
+  - entityManager: EntityManager
+  - patternManager: PatternManager
+  - relationshipManager: RelationshipManager
+}
+
+class WriteFacade {
+ - pkb: PKB&
+}
+
+class ReadFacade {
+ - pkb: PKB&
+}
+
+class EntityManager {
+ - varStore: EntitySetStore<std::string>
+ - constStore: EntitySetStore<std::string>
+ - procStore: EntitySetStore<std::string>
+ - stmtStore: StatementStore
+ - callsProcStore: TwoWayMapManager<int, std::string>
+ - printsVarStore: TwoWayMapManager<int, std::string>
+ - readsVarStore: TwoWayMapManager<int, std::string>
+}
+
+class PatternManager {
+ - assignExpPatternStore: AssignExpPatternStore
+ - whileExpPatternStore: TwoWayMapManager<int, std::string>
+ - ifExpPatternStore: TwoWayMapManager<int, std::string>
+}
+
+class RelationshipManager {
+  -followsStore: TwoWayMapManager<int, int> 
+  -followsStarStore: TwoWayMapManager<int, int> 
+  -parentStore: TwoWayMapManager<int, int> 
+  -parentStarStore: TwoWayMapManager<int, int> 
+  -usesStore: TwoWayMapManager<int, std::string> 
+  -modifiesStore: TwoWayMapManager<int, std::string> 
+  -usesProcedureStore: TwoWayMapManager<std::string, std::string>
+  -modifiesProcedureStore: TwoWayMapManager<std::string, std::string>
+  -callStore: TwoWayMapManager<std::string, std::string>
+  -callStarStore: CallStarStore<std::string, std::string> 
+  -nextStore: TwoWayMapManager<int, int>
+}
+
+class TwoWayMapManager<K, V> {
+ # leftToRightMap: std::unordered_map<K, std::vector<V>>
+ # rightToLeftMap: std::unordered_map<V, std::vector<K>>
+ # leftSet: std::unordered_set<K>
+ # rightSet: std::unordered_set<V>
+}
+
+class CallStarStore extends TwoWayMapManager<K, V> {
+ 
+}
+
+class StatementStore {
+ - statements: std::unordered_map<StatementType, std::unordered_set<int>>
+}
+
+
+class AssignExpPatternStore {
+ - assignExps: std::unordered_map<std::pair<std::string, std::string>, std::vector<std::string>, PairHash>
+}
+
+
+class EntitySetStore<T> {
+ - set: std::unordered_set<T>
+}
+
+enum StatementType {
+    STATEMENT
+    READ
+    PRINT
+    ASSIGN
+    CALL
+    WHILE
+    IF
+}
+
+struct "PairHash" {
+  + operator()(p: std::pair<std::string, std::string>): std::size_t
+}
+
+
+WriteFacade --> PKB
+ReadFacade --> PKB
+
+PKB *-- RelationshipManager
+PKB *-- EntityManager
+PKB *-- PatternManager
+
+
+EntityManager *-- EntitySetStore
+EntityManager *-- StatementStore
+
+
+PatternManager *-- AssignExpPatternStore
+
+EntityManager *-- TwoWayMapManager
+RelationshipManager *-- TwoWayMapManager
+PatternManager *-- TwoWayMapManager
+
+@enduml

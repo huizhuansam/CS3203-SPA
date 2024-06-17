@@ -1,0 +1,55 @@
+@startuml
+class  QPS {
+  + std::list<std::string> evaluate(std::string& query)
+}
+
+class Tokenizer {
+  + std::vector<std::shared_ptr<Token>> tokenize(const std::string& queryString)
+}
+note bottom of Tokenizer
+  Details of Tokenizer are not shown in this class diagram.
+  Please refer to qps-tokenizer-class-diagram.svg
+end note
+
+class Validator {
+  + void validate(std::vector<std::shared_ptr<Token>>& tokens)
+}
+note bottom of Validator
+  Details of Validator are not shown in this class diagram.
+  Please refer to qps-validator-class-diagram.svg
+end note
+
+class Parser {
+  + std::vector<std::shared_ptr<Strategy>> parse(std::vector<std::shared_ptr<Token>>& tokens)
+}
+note bottom of Parser
+  Details of Parser are not shown in this class diagram.
+  Please refer to qps-parser-class-diagram.svg
+end note
+
+class Optimizer {
+  + std::shared_ptr<Strategy> getSelectStrategy()
+  + std::vector<std::vector<std::shared_ptr<Strategy>>> getGroups()
+  + std::vector<std::shared_ptr<Strategy>> optimize(std::vector<std::shared_ptr<Token>>& tokens)
+}
+note bottom of Optimizer
+  Details of Optimizer are not shown in this class diagram.
+  Please refer to qps-optimizer-class-diagram.svg
+end note
+
+class Evaluator {
+  + std::list<std::string> getResultList(ReadFacade& readFacade, const std::shared_ptr<Strategy>& selectStrategy,
+    const std::vector<std::vector<std::shared_ptr<Strategy>>>& groups)
+}
+note bottom of Evaluator
+  Details of Evaluator are not shown in this class diagram.
+  Please refer to qps-evaluator-class-diagram.svg
+end note
+
+QPS --> Tokenizer
+QPS --> Validator
+QPS --> Parser
+QPS --> Optimizer
+QPS --> Evaluator
+
+@enduml

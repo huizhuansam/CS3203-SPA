@@ -1,0 +1,47 @@
+procedure first {
+	call fifth;
+	call sixth;
+}
+
+procedure second {
+	call third;
+	call eight;
+	read tenth;
+	call tenth;
+}
+
+procedure third {
+	call seventh;
+	call first;
+}
+
+procedure fourth {
+	call sixth;
+}
+
+procedure fifth {
+	call second;
+	call second;
+}
+
+procedure sixth {
+	call nineth;
+}
+
+procedure seventh {
+	print eighth;
+}
+
+procedure eighth {
+	call tenth;
+}
+
+procedure nineth {
+	call nineth;
+}
+
+procedure tenth {
+	call second;
+	call first;
+	call fourth;
+}

@@ -1,0 +1,17 @@
+@startuml
+
+class TwoWayMapManager<K, V> {
+  #leftToRightMap: std::unordered_map<K, std::unordered_set<V>>
+  #rightoLeftMap: std::unordered_map<V, std::unordered_set<K>>
+  #leftSet: std::unordered_set<K>
+  #rightSet: std::unordered_set<V>
+  +insert(K key, V value): void
+  +getLeftToRight(K& key): std::unordered_set<V>
+  +getRightToLeft(V& key): std::unordered_set<K>
+  +getAllPairs(): std::unordered_set<std::pair<K, V>, PairHash>
+  +getAllLefts(): std::unordered_set<K>
+  +getAllRights(): std::unordered_set<V>
+  +clear(): void
+}
+
+@enduml

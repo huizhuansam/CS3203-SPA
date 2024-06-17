@@ -1,0 +1,85 @@
+1 - Single Relationship (No synoymns)
+stmt s;
+Select s such that not Follows(_,_)
+none
+5000
+2 - Single Relationship (1 synonym)
+stmt s;
+Select s such that not Parent*(5, s)
+1, 2, 3, 4, 5, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31
+5000
+3 - Single Relationship (2 synonyms)
+while w; variable v;
+Select v such that not Uses(w, v)
+second, abcd, d, ab, e, f, bc, c
+5000
+4 - Multi Relationship
+assign a; variable v; stmt s;
+Select v such that not Uses(13,v) pattern a ("a", _"b"_) such that Modifies(s,v)
+ab,abcd,c,d,fifth,first,fourth,second,third
+5000
+5 - Multi Relationship
+assign a; variable v; stmt s;
+Select v such that Uses(13,v) pattern not a ("a", _"b"_) such that Modifies(s,v)
+a, b
+5000
+6 - Multi Relationship
+assign a; variable v; stmt s;
+Select v such that Uses(13,v) pattern not a ("a", _"b"_) such that not Modifies(s,v)
+a,b,x,y,z
+5000
+7 - Multi Relationship
+assign a; variable v; stmt s1,s2;
+Select v such that not Uses(s1,v) and Modifies(s2, v) pattern a (v, _"b"_)
+a,c,d,third
+5000
+8 - Multi Relationship
+assign a; variable v; stmt s1,s2;
+Select v such that Uses(s1,v) and not Modifies(s2, v) pattern a (v, _"b"_)
+a,c,d,third
+5000
+9 - Multi Relationship
+assign a; variable v; stmt s1,s2;
+Select v such that Uses(s1,v) and Modifies(s2, v) pattern not a (v, _"b"_)
+b, fourth, fifth, first, a,c,d,third
+5000
+10 - With Clause (no attrName)
+constant c;
+Select c with not 1 = 1 
+none
+5000
+11 - With Clause (1 attrName)
+call c;
+Select c with not "fifth" = c.procName
+11, 24, 26, 29
+5000
+12 - With Clause (2 attrName)
+variable v; read r;
+Select v with not v.varName = r.varName
+third, fourth, f1fth, A, a, b, c, d, bc, c4, e, f, x, y, z, ab, abcd, fifth, first, second
+5000
+13 - With Clause
+constant c;
+Select c with not 1 = c.value
+2, 4, 5, 6, 42, 123, 456
+5000
+14 - With Clause
+print p;
+Select p with not p.varName = "bc"
+4, 14, 23, 28, 31
+5000
+15 - BOOLEAN Clause true + not false
+variable v;
+Select BOOLEAN such that Follows*(19,22) and not Parent(8,18)
+TRUE
+5000
+16 - Boolean clauses, not true + true
+variable v;
+Select BOOLEAN such that not Modifies(3,"a") and Parent(9,15)
+FALSE
+5000
+17 - Boolean, Double nots for both clauses that are false
+variable v;
+Select BOOLEAN such that not Uses(4,"b") such that not Follows(24,23)
+TRUE
+5000

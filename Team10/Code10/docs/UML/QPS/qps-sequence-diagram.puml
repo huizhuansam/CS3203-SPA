@@ -1,0 +1,68 @@
+@startuml
+title QPS Sequence Diagram
+
+actor User
+participant SPA
+participant QPS
+participant Tokenizer
+participant Validator
+participant Parser
+participant Optimizer
+participant Evaluator
+participant ReadFacade
+
+User -> SPA: query
+activate SPA
+SPA -> QPS: evaluate(query)
+activate QPS
+
+QPS -> Tokenizer: Tokenizer::tokenize(query)
+activate Tokenizer
+Tokenizer --> QPS: tokens
+deactivate Tokenizer
+
+QPS -> Validator: Validator::validate(tokens)
+activate Validator
+alt Invalid syntax
+  Validator --> QPS: SyntaxError
+  QPS --> SPA: SyntaxError
+  SPA --> User: SyntaxError
+else
+  alt Invalid semantics
+    Validator --> QPS: SemanticError
+    QPS --> SPA: SemanticError
+    SPA --> User: SemanticError
+  else Valid query
+    Validator --> QPS: void
+    deactivate Validator
+
+    QPS -> Parser: Parser::parse(tokens)
+    activate Parser
+    Parser --> QPS: strategies
+    deactivate Parser
+
+    QPS -> Optimizer: Optimizer::optimize(strategies)
+    activate Optimizer
+    Optimizer --> QPS: void
+    deactivate Optimizer
+
+    QPS -> Evaluator: Evaluator::getResultList(readFacade, selectStrategy, groups)
+    activate Evaluator
+
+    Evaluator -> ReadFacade: <API CALLS>
+    activate ReadFacade
+    ReadFacade --> Evaluator: result
+    deactivate ReadFacade
+
+    Evaluator --> QPS: result list
+    deactivate Evaluator
+
+    QPS -> SPA: result list
+    deactivate QPS
+
+    SPA -> User: result list
+    deactivate SPA
+  end
+end
+
+@enduml

@@ -1,0 +1,9 @@
+procedure checkPattern {
+	 a = 20 / b + c - (d % e) * f;
+	 a = 20 / B + C - (d % E) * f;
+	 f = x + y + z;
+	 f = x + (y + z);
+	 F = x + (y + z);
+	 doctor = boom;
+	 long = x + y * 5 - z + (a / 2) * b;
+}

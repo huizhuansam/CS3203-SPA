@@ -1,0 +1,70 @@
+1 - [Parent][pattern][Modifies] no common synonym, related synonym, all exists
+assign a;
+Select a such that Parent(9,14) and Modifies(7,"c") pattern a ("a", _"b"_)
+3,13
+5000
+2 - [Modifies][pattern][Parent] no common synonym, related target, one does not exist
+assign a;
+Select a such that Parent(9,20) and Modifies(7,"c") pattern a ("a", _"b"_)
+none
+5000
+3 - [pattern][Uses][Follows] common synonym between first and second
+assign a;
+Select a pattern a ("a", _"b"_) such that Uses(a,"x") and Follows(8,16)
+13
+5000
+4 - [pattern][Modifies][Uses] common synonym between second and third
+assign a; variable v; stmt s;
+Select v pattern a ("a", _"b"_) such that Modifies(s,v) and Uses(13,v)
+a,b
+5000
+5 - [pattern][Modifies][Uses] common synonym between second and third
+assign a; variable v; stmt s;
+Select v such that Uses(13,v) pattern a ("a", _"b"_) such that Modifies(s,v)
+a,b
+5000
+6 - [Uses][Modifies][pattern] common synonym in all three clauses
+assign a; variable v; stmt s1,s2;
+Select v such that Uses(s1,v) and Modifies(s2, v) pattern a (v, _"b"_)
+a,c,d,third
+5000
+7 - [Uses][Modifies][Calls] common synonym in all three clauses
+variable v; procedure p;
+Select p such that Uses(20,v) and Modifies (p, v) and Calls ("second", p)
+third
+5000
+8 - [Uses][Calls][Modifies] common synonym in all three clauses
+variable v; procedure p;
+Select v such that Uses(20,v) and Calls ("second", p) and Modifies (p, v)
+d
+5000
+9a - [Uses][Affects][Next*] common synonym in all three clauses
+variable v; assign a1, a2, a3;
+Select <a1, a2> such that Uses(20,v) and Affects (a1, 7) and Next* (a2, a3)
+3 3, 3 7, 3 13, 3 17, 3 18, 3 19, 3 20,7 3, 7 7, 7 13, 7 17, 7 18, 7 19, 7 20,17 3, 17 7, 17 13, 17 17, 17 18, 17 19, 17 20,18 3, 18 7, 18 13, 18 17, 18 18, 18 19, 18 20
+5000
+9b - [Uses][Next*][Affects] common synonym in all three clauses
+variable v; assign a1, a2, a3;
+Select <a1, a2> such that Uses(20,v) and Next* (a2, a3) and Affects (a1, 7)
+3 3, 3 7, 3 13, 3 17, 3 18, 3 19, 3 20,7 3, 7 7, 7 13, 7 17, 7 18, 7 19, 7 20,17 3, 17 7, 17 13, 17 17, 17 18, 17 19, 17 20,18 3, 18 7, 18 13, 18 17, 18 18, 18 19, 18 20
+5000
+9c - [Affects][Next*][Uses] common synonym in all three clauses
+variable v; assign a1, a2, a3;
+Select <a1, a2> such that Affects (a1, 7) and Next* (a2, a3) and Uses(20,v)
+3 3, 3 7, 3 13, 3 17, 3 18, 3 19, 3 20,7 3, 7 7, 7 13, 7 17, 7 18, 7 19, 7 20,17 3, 17 7, 17 13, 17 17, 17 18, 17 19, 17 20,18 3, 18 7, 18 13, 18 17, 18 18, 18 19, 18 20
+5000
+9d - [Affects][Uses][Next*] common synonym in all three clauses
+variable v; assign a1, a2, a3;
+Select <a1, a2> such that Affects (a1, 7) and Uses(20,v) and Next* (a2, a3)
+3 3, 3 7, 3 13, 3 17, 3 18, 3 19, 3 20,7 3, 7 7, 7 13, 7 17, 7 18, 7 19, 7 20,17 3, 17 7, 17 13, 17 17, 17 18, 17 19, 17 20,18 3, 18 7, 18 13, 18 17, 18 18, 18 19, 18 20
+5000
+9e - [Next*][Affects][Uses] common synonym in all three clauses
+variable v; assign a1, a2, a3;
+Select <a1, a2> such that Next* (a2, a3)  and Affects (a1, 7)  and Uses(20,v)
+3 3, 3 7, 3 13, 3 17, 3 18, 3 19, 3 20,7 3, 7 7, 7 13, 7 17, 7 18, 7 19, 7 20,17 3, 17 7, 17 13, 17 17, 17 18, 17 19, 17 20,18 3, 18 7, 18 13, 18 17, 18 18, 18 19, 18 20
+5000
+9f - [Next*][Uses][Affects] common synonym in all three clauses
+variable v; assign a1, a2, a3;
+Select <a1, a2> such that Next* (a2, a3)  and Uses(20,v) and  Affects (a1, 7)
+3 3, 3 7, 3 13, 3 17, 3 18, 3 19, 3 20,7 3, 7 7, 7 13, 7 17, 7 18, 7 19, 7 20,17 3, 17 7, 17 13, 17 17, 17 18, 17 19, 17 20,18 3, 18 7, 18 13, 18 17, 18 18, 18 19, 18 20
+5000

@@ -1,0 +1,20 @@
+@startuml
+activate SP
+SP -> WriteFacade: insertDirectFollowsRelationship(1, 2)
+activate WriteFacade
+
+WriteFacade -> PKB: insertDirectFollowsRelationship(1, 2)
+activate PKB
+
+PKB -> RelationshipManager: insertDirectFollowsRelationship(1, 2)
+activate RelationshipManager
+
+RelationshipManager -> TwoWayMapManager: insert(1, 2)
+activate TwoWayMapManager
+TwoWayMapManager --> RelationshipManager
+
+RelationshipManager --> PKB
+PKB --> WriteFacade
+
+SP<-- WriteFacade
+@enduml

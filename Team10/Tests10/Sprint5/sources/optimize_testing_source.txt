@@ -1,0 +1,61 @@
+procedure complexProcedure {
+    read w;
+    read x;
+    read y;
+    read z;
+    read a;
+    read b;
+    read c;
+
+    tempA = x + y + a;
+    tempB = y + z + b;
+    tempC = z + a + c;
+    tempD = a + b + w;
+    tempE = b + c + x;
+    tempF = c + w + y;
+
+    while (tempA > 0) {
+        tempA = tempA - 1;
+        tempF = tempF * w;
+
+        while (tempB > 0) {
+            tempB = tempB - 1;
+            tempE = tempE * x;
+
+            if (tempC > 0) then {
+                tempC = tempC - 1;
+                tempD = tempD * y;
+
+                while (tempD > 0) {
+                    tempD = tempD - 1;
+                    tempC = tempC * z;
+
+                    if (tempE > 0) then {
+                        tempE = tempE - 1;
+                        tempB = tempB * a;
+
+                        while (tempF > 0) {
+                            tempF = tempF - 1;
+                            tempA = tempA * b;
+
+                            while (tempA > 0) {
+                                tempA = tempA - 1;
+                                tempF = tempF * c;
+                                print tempF;
+                            }
+                        }
+                        print tempE;
+                    } else {
+                        print tempD;
+                    }
+                    print tempC;
+                }
+                print tempB;
+            } else {
+                print tempA;
+            }
+        }
+    print tempF;
+    }
+    print tempE;
+}

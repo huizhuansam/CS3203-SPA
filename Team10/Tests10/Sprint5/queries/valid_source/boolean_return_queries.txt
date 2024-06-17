@@ -1,0 +1,75 @@
+1 - Boolean clauses, all true
+variable v;
+Select BOOLEAN such that Modifies(3,"a") such that Parent(9,12)
+TRUE
+5000
+2 - Boolean clauses, all false
+variable v;
+Select BOOLEAN such that Uses(4,"b") such that Follows(23,24)
+FALSE
+5000
+3 - Boolean clauses, true + false
+variable v;
+Select BOOLEAN such that Follows*(19,22) such that Parent(8,18)
+FALSE
+5000
+4 - Boolean clauses, false + true
+variable v;
+Select BOOLEAN such that Follows*(19,22) such that Parent(8,18)
+FALSE
+5000
+5 - Non-boolean clauses, non-empty results
+variable v; assign a;
+Select BOOLEAN such that Modifies(a, v) pattern a ("c", _)
+TRUE
+5000
+6 - Non-boolean clauses, non-empty results
+variable v; assign a; stmt s;
+Select BOOLEAN such that Uses(s, v) pattern a ("c", _)
+TRUE
+5000
+7 - Non-boolean clauses, empty pattern results
+variable v; assign a, a1;
+Select BOOLEAN such that Modifies(a, v) pattern a1 ("s", _)
+FALSE
+5000
+8 - Non-boolean clauses, empty results
+variable v; assign a;
+Select BOOLEAN such that Modifies(23, v) pattern a ("s", _)
+FALSE
+5000
+9 - Mix clauses, true + non-empty result
+variable v; assign a;
+Select BOOLEAN such that Modifies(13, "a") pattern a ("c", _)
+TRUE
+5000
+10 - Mix clauses, true + empty result
+variable v; assign a;
+Select BOOLEAN such that Modifies(13, "a") pattern a ("s", _)
+FALSE
+5000
+11 - Mix clauses, false + non-empty result
+variable v; assign a;
+Select BOOLEAN such that Modifies(14, "a") pattern a ("b", _)
+FALSE
+5000
+12 - Mix clauses, false + empty result
+variable v; assign a;
+Select BOOLEAN such that Modifies(14, "a") pattern a ("B", _)
+FALSE
+5000
+13 - Invalid boolean select
+variable v;
+Select boolean such that Calls("first", "fifth")
+SemanticError
+5000
+14 - BOOLEAN declared as synonym
+assign BOOLEAN;
+Select BOOLEAN
+3,7,13,17,18,19,20,21,25,30
+5000
+15 - No clauses
+assign a;
+Select BOOLEAN
+TRUE
+5000

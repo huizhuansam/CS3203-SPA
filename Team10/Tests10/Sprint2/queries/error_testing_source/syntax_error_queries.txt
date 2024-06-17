@@ -1,0 +1,90 @@
+1 - semi-colon after Select clause
+variable v;
+Select v;
+SyntaxError
+5000
+2 - lower case Select
+variable v;
+select v
+SyntaxError
+5000
+3 - uppercase variable
+Variable v;
+select v
+SyntaxError
+5000
+4 - uppercase constant
+Constant c;
+select c
+SyntaxError
+5000
+5 - uppercase procedure
+Procedure p;
+Select p
+SyntaxError
+5000
+6 - uppercase stmt
+Stmt s;
+Select s
+SyntaxError
+5000
+7 - uppercase print
+Print p;
+Select p
+SyntaxError
+5000
+8 - uppercase while
+While w;
+Select w
+SyntaxError
+5000
+9 - uppercase if
+If if;
+Select if
+SyntaxError
+5000
+10 - non-existant synonym
+HelloWorld hw;
+Select hw
+SyntaxError
+5000
+11 - such that must be followed by a relation
+assign a; procedure p;
+Select a such that a(p, _)
+SyntaxError
+5000
+12 - such that must be followed by a relation
+assign a; stmt s;
+Select a such that
+SyntaxError
+5000
+13 - such that must be followed by a relation and not pattern
+assign a; read r;
+Select a such that pattern a(r, _)
+SyntaxError
+5000
+14 - Not declaring synonym after declaring assign
+assign; read r;
+Select a such that pattern a(r, _)
+SyntaxError
+5000
+15 - invalid character in query
+stmt s_1;
+Select s_1
+SyntaxError
+5000
+16 - Select before declaration
+Select v
+variable v;
+SyntaxError
+5000
+17 - Use synonym starting with integer
+variable 2v;
+Select 2v
+SyntaxError
+5000
+18 - invalid query
+stmt s; variable v;
+Select s, v
+SyntaxError
+5000

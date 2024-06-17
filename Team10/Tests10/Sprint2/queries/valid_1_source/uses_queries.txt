@@ -1,0 +1,40 @@
+1 - Check that statement 4 uses a variable
+stmt s;
+Select s such that Uses(4, _)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
+5000
+2 - Check that statement 1 uses a variable -- NEGATIVE CASE
+stmt s; 
+Select s such that Uses(1, _)
+none
+5000
+3 - Select the variable that statement 4 uses
+stmt s; variable v;
+Select v such that Uses(4, v)
+number
+5000
+4 - Select the variable that statement 1 uses -- NEGATIVE CASE
+stmt s; variable v;
+Select v such that Uses(1, v)
+none
+5000
+5 - Select all statements that uses a variable
+stmt s;
+Select s such that Uses(s, _)
+3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 15, 16
+5000
+6 - Select all variables that get used
+stmt s; variable v;
+Select v such that Uses(s, v)
+number, sum, digit, x, bazooka, number28, c, toilet, tiktok, jobs, birb, money
+5000
+7 - Select all statements that uses the variable number
+stmt s;
+Select s such that Uses(s, "number")
+3, 4, 6, 7, 9
+5000
+8 - Select all statements that uses the variable hello -- NEGATIVE CASE
+stmt s;
+Select s such that Uses(s, "hello")
+none
+5000

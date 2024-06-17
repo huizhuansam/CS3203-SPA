@@ -1,0 +1,5 @@
+procedure
+weirdWhitespace {
+    read            WhiteeE        ;print  SpaCE
+;xD=
+1+y                                      ;}

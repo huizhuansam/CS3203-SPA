@@ -1,0 +1,139 @@
+﻿@startuml
+class WriteFacade {
+ - pkb: PKB&
+ + clearPKB(): void
+ + addProcedure(const std::string& proc): void
+ + addConstant(const std::string& constant): void
+ + addVariable(const std::string& var): void
+ + addStatement(StatementType type, int stmtNo): void
+ + insertStmtCallsProc(int stmtNo, const std::string& procName): void
+ + insertStmtPrintsVar(int stmtNo, const std::string& var): void
+ + insertStmtReadsVar(int stmtNo, const std::string& var): void
+ + addAssignExpPattern(int stmtNo, const std::string& var, const std::vector<std::string>& exp): void
+ + addWhileControlVariable(int stmtNo, const std::string& var): void
+ + addIfControlVariable(int stmtNo, const std::string& var): void
+ + insertDirectParentChildRelationship(int parentStmtNo, int childStmtNo): void
+ + insertParentStarRelationship(int parentStmtNo, int childStmtNo): void
+ + insertDirectFollowsRelationship(int beforeStmtNo, int afterStmtNo): void
+ + insertFollowsStarRelationship(int beforeStmtNo, int afterStmtNo): void
+ + insertUses(int stmtNo, const std::string& var): void
+ + insertUsesProcedure(const std::string& str1, const std::string& str2): void
+ + insertModifies(int stmtNo, const std::string& var): void
+ + insertModifiesProcedure(const std::string& procName, const std::string& var): void
+ + insertCallsRelationship(const std::string& sourceProcName, const std::string& targetProcName): void
+ + insertNextRelationship(int previousStmtNo, int nextStmtNo): void
+}
+
+class ReadFacade {
+ - pkb: PKB&
+ - nextStarMemoize: std::unordered_map<int, std::unordered_set<int>>
+ - prevStarMemoize: std::unordered_map<int, std::unordered_set<int>>
+ - affectsStarMemoize: std::unordered_map<int, std::unordered_set<int>>
+
+ + getAllVariables(): std::unordered_set<std::string>
+ + getAllConstants(): std::unordered_set<std::string>
+ + getAllProcedures(): std::unordered_set<std::string>
+ 
+ + getStatements(): std::unordered_set<int>
+ + getAssigns(): std::unordered_set<int>
+ + getReads(): std::unordered_set<int>
+ + getPrints(): std::unordered_set<int>
+ + getCalls(): std::unordered_set<int>
+ + getWhiles(): std::unordered_set<int>
+ + getIfs(): std::unordered_set<int>
+
+ + getProcCalledByStmt(int stmtNo): std::string 
+ + getAllStmtsThatCallProc(std::string& procName): std::unordered_set<int> 
+ + getAllCallsProcPairs(): std::unordered_set<std::pair<int, std::string>, PairHash>
+ + getAllProceduresCalledByStmts(): std::unordered_set<std::string> 
+
+ + getVarPrintedByStmt(int stmtNo): std::string 
+ + getAllStmtsThatPrintVar(std::string& var): std::unordered_set<int> 
+ + getAllPrintVarPairs(): std::unordered_set<std::pair<int, std::string>, PairHash>
+ + getAllVarsPrintByStmts(): std::unordered_set<std::string> 
+
+ + getVarReadByStmt(int stmtNo): std::string 
+ + getAllStmtsThatReadVar(std::string& var): std::unordered_set<int> 
+ + getAllReadVarPairs(): std::unordered_set<std::pair<int, std::string>, PairHash> 
+ + getAllVarsReadByStmts(): std::unordered_set<std::string> 
+
+ + getAllAssignExpPairs(): std::vector<std::pair<std::string, std::string>>
+ + getAssignExpPairsPartialMatch(const std::string& var, const std::vector<std::string>& infixTokens): std::vector<std::pair<std::string, std::string>>
+ + getAssignExpPairsSynonymPartialMatch(const std::vector<std::string>& infixTokens): std::vector<std::pair<std::string, std::string>>
+ + getAssignExpPairsExactMatch(const std::string& var, const std::vector<std::string>& infixTokens): std::unordered_set<std::pair<std::string, std::string>, PairHash>
+ + getAssignExpPairsSynonymExactMatch(const std::vector<std::string>& infixTokens): std::unordered_set<std::pair<std::string, std::string>, PairHash>
+
+ + getControlVariableOfWhileStmt(int stmtNo): std::unordered_set<std::string> 
+ + getWhileStmtsThatUseControlVariable(const std::string& var): std::unordered_set<int> 
+ + getAllWhileControlVariablePairs(): std::unordered_set<std::pair<int, std::string>, PairHash> 
+ + getAllWhileStmtsThatUseControlVariables():  std::unordered_set<int> 
+ + getAllWhileControlVariables(): std::unordered_set<std::string> 
+
+ + getControlVariableOfIfStmt(int stmtNo): std::unordered_set<std::string> 
+ + getIfStmtsThatUseControlVariable(const std::string& var): std::unordered_set<int> 
+ + getAllIfControlVariablePairs(): std::unordered_set<std::pair<int, std::string>, PairHash> 
+ + getAllIfStmtsThatUseControlVariables():  std::unordered_set<int> 
+ + getAllIfControlVariables(): std::unordered_set<std::string> 
+
+ + getStmtThatFollowsAfter(int stmtNo): int
+ + getAllStmtsThatFollowAfter(int stmtNo): std::unordered_set<int>
+ + getStmtThatFollowsBefore(int stmtNo): int
+ + getAllStmtsThatFollowBefore(int stmtNo): std::unordered_set<int>
+ + getAllFollowsPairs(): std::unordered_set<std::pair<int, int>, PairHash>
+ + getAllFollowStarPairs(): std::unordered_set<std::pair<int, int>, PairHash>
+ + getAllStmtsThatFollowBeforeOtherStmts(): std::unordered_set<int>
+ + getAllStmtsThatFollowAfterOtherStmts(): std::unordered_set<int>
+
+ + getChildren(int parentStmtNo): std::unordered_set<int>
+ + getChildrenStar(int parentStmtNo): std::unordered_set<int>
+ + getParent(int childStmtNo): int
+ + getParentStar(int childStmtNo): std::unordered_set<int>
+ + getAllParentPairs(): std::unordered_set<std::pair<int, int>, PairHash>
+ + getAllParents(): std::unordered_set<int>
+ + getAllChildren(): std::unordered_set<int>
+ + getAllParentStarPairs(): std::unordered_set<std::pair<int, int>, PairHash>
+
+ + getProcsThatCalls(std::string& targetProcName): std::unordered_set<std::string> 
+ + getProcsThatCallsStar(std::string& targetProcName): std::unordered_set<std::string> 
+ + getProcsThatIsCalledBy(std::string& sourceProcName): std::unordered_set<std::string>
+ + getProcsThatIsCalledByStar(std::string& sourceProcName): std::unordered_set<std::string> 
+ + getAllCallPairs(): std::unordered_set<std::pair<std::string, std::string>, PairHash> 
+ + getAllCallStarPairs(): std::unordered_set<std::pair<std::string, std::string>, PairHash> 
+ + getAllProcsThatCallOtherProcs(): std::unordered_set<std::string> 
+ + getAllProcsThatGetCalledByOtherProcs(): std::unordered_set<std::string> 
+
+ + getVarsModifiedByStmt(int stmtNo): std::unordered_set<std::string>
+ + getStmtsThatModifyVar(std::string var): std::unordered_set<int>
+ + getAllVarModifiedByStmtPairs(): std::unordered_set<std::pair<int, std::string>, PairHash>
+ + getAllStmtsThatModifyVars(): std::unordered_set<int>
+ + getAllVarsModifiedByStmts(): std::unordered_set<std::string>
+
+ + getVarsModifiedByProcedure(std::string& procName): std::unordered_set<std::string>
+ + getProceduresThatModifyVar(std::string& var): std::unordered_set<std::string>
+ + getAllVarModifiedByProcedurePairs(): std::unordered_set<std::pair<std::string, std::string>, PairHash>
+ + getAllProceduresThatModifyVars(): std::unordered_set<std::string>
+ + getAllVarsModifiedByProcedures(): std::unordered_set<std::string>
+
+ + getVarsUsedByStmt(int stmtNo): std::unordered_set<std::string>
+ + getStmtsThatUseVar(std::string var): std::unordered_set<int>
+ + getAllVarUsedByStmtPairs(): std::unordered_set<std::pair<int, std::string>, PairHash>
+ + getAllStmtsThatUseVars(): std::unordered_set<int>
+ + getAllVarsUsedByStmts(): std::unordered_set<std::string>
+
+ + getVarsUsedByProcedure(std::string procName): std::unordered_set<std::string>
+ + getProceduresThatUseVar(std::string var): std::unordered_set<std::string>
+ + getAllVarUsedByProcedurePairs(): std::unordered_set<std::pair<std::string, std::string>, PairHash>
+ + getAllProceduresThatUseVars(): std::unordered_set<std::string>
+ + getAllVarsUsedByProcedures(): std::unordered_set<std::string>
+
+ + getStmtsNextOf(int stmtNo): std::unordered_set<int>
+ + getStmtsNextStarOf(int stmtNo): std::unordered_set<int>
+ + getStmtsPreviousOf(int stmtNo): std::unordered_set<int>
+ + getStmtsPreviousStarOf(int stmtNo): std::unordered_set<int>
+ + getStmtByDFS(int stmtNo, bool isNext): std::unordered_set<int>
+ + getAllNextPairs(): std::unordered_set<std::pair<int, int>, PairHash> 
+ + getAllStmtsThatAreNextOfOtherStmts(): std::unordered_set<int>
+ + getAllStmtsThatArePreviousOfOtherStmts(): std::unordered_set<int>
+ + getStmtsAffectedBy(int stmtNo): std::unordered_set<int>
+}
+@enduml

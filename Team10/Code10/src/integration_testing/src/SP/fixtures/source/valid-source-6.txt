@@ -1,0 +1,33 @@
+procedure complexCondExprWithComplexExpr {
+    read x;
+    read y;
+    while (
+            (
+                (
+                    !(1 < (y + 1) * 5 / (x - 3))
+                )
+                ||
+                (
+                    ((x + 3) * 5 == y)
+                    &&
+                    ((y) != (x + 3) * 5)
+                )
+            )
+            &&
+            (
+                (
+                    (y + 3) * 5 % x != y
+                )
+                ||
+                (
+                    ((x >= y) || (y <= x))
+                    &&
+                    (!(x > y))
+                )
+            )
+          )
+    {
+        print x;
+        print y;
+    }
+}

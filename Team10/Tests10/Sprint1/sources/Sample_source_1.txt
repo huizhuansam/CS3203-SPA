@@ -1,0 +1,4 @@
+procedure FooBar {
+    read x;
+    print y;
+}

@@ -1,0 +1,245 @@
+1 - semi-colon after Select clause
+variable v;
+Select v;
+SyntaxError
+5000
+2 - lower case Select
+variable v;
+select v
+SyntaxError
+5000
+3 - uppercase variable
+Variable v;
+select v
+SyntaxError
+5000
+4 - uppercase constant
+Constant c;
+select c
+SyntaxError
+5000
+5 - uppercase procedure
+Procedure p;
+Select p
+SyntaxError
+5000
+6 - uppercase stmt
+Stmt s;
+Select s
+SyntaxError
+5000
+7 - uppercase print
+Print p;
+Select p
+SyntaxError
+5000
+8 - uppercase while
+While w;
+Select w
+SyntaxError
+5000
+9 - uppercase if
+If if;
+Select if
+SyntaxError
+5000
+10 - non-existant synonym
+HelloWorld hw;
+Select hw
+SyntaxError
+5000
+11 - such that must be followed by a relation
+assign a; procedure p;
+Select a such that a(p, _)
+SyntaxError
+5000
+12 - such that must be followed by a relation
+assign a; stmt s;
+Select a such that
+SyntaxError
+5000
+13 - such that must be followed by a relation and not pattern
+assign a; read r;
+Select a such that pattern a(r, _)
+SyntaxError
+5000
+14 - Not declaring synonym after declaring assign
+assign; read r;
+Select a such that pattern a(r, _)
+SyntaxError
+5000
+15 - invalid character in query
+stmt s_1;
+Select s_1
+SyntaxError
+5000
+16 - Select before declaration
+Select v
+variable v;
+SyntaxError
+5000
+17 - Use synonym starting with integer
+variable 2v;
+Select 2v
+SyntaxError
+5000
+18 - invalid query
+stmt s; variable v;
+Select s, v
+SyntaxError
+5000
+19 - and should not appear before such that
+assign a; while w;
+Select a such that Parent* (w, a) and Modifies (a, "x") and such that Next* (1, a)
+SyntaxError
+5000
+20 - and should not appear before pattern
+assign a; while w;
+Select a such that Parent* (w, a) and pattern a ("x", _) such that Next* (1, a)
+SyntaxError
+5000
+21 - and should not connect pattern and a such-that clause
+assign a; while w;
+Select a such that Parent* (w, a) pattern a ("x", _) and Next* (1, a)
+SyntaxError
+5000
+23 - Procedure cannot be synonym in second arg of if pattern
+if i; procedure p;
+Select i pattern i(_, p, _)
+SyntaxError
+5000
+23 - Statement cannot be synonym in second arg of if pattern
+if i; stmt s;
+Select i pattern i(_, s, _)
+SyntaxError
+5000
+24 - Read cannot be synonym in second arg of if pattern
+if i; read r;
+Select i pattern i(_, r, _)
+SyntaxError
+5000
+25 - Print cannot be synonym in second arg of if pattern
+if i; print pn;
+Select i pattern i(_, pn, _)
+SyntaxError
+5000
+26 - Assign cannot be synonym in second arg of if pattern
+assign a, a1;
+Select i pattern i(_, a, _)
+SyntaxError
+5000
+27 - While cannot be synonym in second arg of if pattern
+if i; while w;
+Select i pattern i(_, w, _)
+SyntaxError
+5000
+28 - If cannot be synonym in second arg of if pattern
+if i; if ifs;
+Select i pattern i(_, ifs, _)
+SyntaxError
+5000
+29 - variable cannot be synonym in second arg of if pattern
+if i; variable v;
+Select i pattern i(_, v, _)
+SyntaxError
+5000
+30 - constant cannot be synonym in second arg of if pattern
+if i; constant c;
+Select i pattern i(_, c, _)
+SyntaxError
+5000
+31 - Procedure cannot be synonym in third arg of if pattern
+if i; procedure p;
+Select i pattern i(_,_,p)
+SyntaxError
+5000
+32 - Statement cannot be synonym in third arg of if pattern
+if i; stmt s;
+Select i pattern i(_,_,s)
+SyntaxError
+5000
+33 - Read cannot be synonym in third arg of if pattern
+if i; read r;
+Select i pattern i(_, _, r)
+SyntaxError
+5000
+34 - Print cannot be synonym in third arg of if pattern
+if i; print pn;
+Select i pattern i(_, _, pn)
+SyntaxError
+5000
+35 - Assign cannot be synonym in third arg of if pattern
+assign a, a1;
+Select i pattern i(_, _, a)
+SyntaxError
+5000
+36 - While cannot be synonym in third arg of if pattern
+if i; while w;
+Select i pattern i(_, _, w)
+SyntaxError
+5000
+37 - If cannot be synonym in third arg of if pattern
+if i; if ifs;
+Select i pattern i(_, _, ifs)
+SyntaxError
+5000
+38 - variable cannot be synonym in third arg of if pattern
+if i; variable v;
+Select i pattern i(_, _, v)
+SyntaxError
+5000
+39 - constant cannot be synonym in third arg of if pattern
+if i; constant c;
+Select i pattern i(_, _, c)
+SyntaxError
+5000
+40 - ident cannot be input in third arg of if pattern
+if i; if ifs;
+Select i pattern i(_, _, "test")
+SyntaxError
+5000
+41 - Procedure cannot be synonym in second arg of while pattern
+while w; procedure p;
+Select w pattern w(_, p)
+SyntaxError
+5000
+42 - Statement cannot be synonym in second arg of while pattern
+while w; stmt s;
+Select w pattern w(_, s)
+SyntaxError
+5000
+43 - Read cannot be synonym in second arg of while pattern
+while w; read r;
+Select w pattern w(_, r)
+SyntaxError
+5000
+44 - Print cannot be synonym in second arg of while pattern
+while w; print pn;
+Select w pattern w(_, pn)
+SyntaxError
+5000
+45 - Assign cannot be synonym in second arg of while pattern
+assign a, a1;
+Select w pattern w(_, a)
+SyntaxError
+5000
+46 - While cannot be synonym in second arg of while pattern
+while w1; while w2;
+Select w1 pattern w1(_, w2)
+SyntaxError
+5000
+47 - If cannot be synonym in second arg of while pattern
+while w; if ifs;
+Select w pattern w(_, ifs)
+SyntaxError
+5000
+48 - variable cannot be synonym in second arg of while pattern
+while w; variable v;
+Select w pattern w(_, v)
+SyntaxError
+5000
+49 - constant cannot be synonym in second arg of while pattern
+while w; constant c;
+Select w pattern w(_, c)
+SyntaxError
+5000

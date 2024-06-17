@@ -1,0 +1,88 @@
+1 - Next(int, stmt)
+stmt s;
+Select s such that Next(1, s)
+2
+5000
+2 - Next(while, int)
+while w;
+Select w such that Next(w, 4)
+3
+5000
+3 - Next(_,call)
+call c;
+Select c such that Next(_, c)
+5
+5000
+4 - Next(print, _)
+print p;
+Select p such that Next(p, _)
+6, 9
+5000
+5 - Next(print, assign)
+print p; assign a;
+Select p such that Next(p, a)
+9
+5000
+6 - Next(int, _)
+print p;
+Select BOOLEAN such that Next(6, _)
+TRUE
+5000
+7 - Next(_, int)
+assign a;
+Select BOOLEAN such that Next(_, 1)
+FALSE
+5000
+8 - Next(_, _)
+stmt s;
+Select BOOLEAN such that Next(_, _)
+TRUE
+5000
+9 - Next(int, int) Wiki Test 1
+stmt s;
+Select BOOLEAN such that Next(2, 3)
+TRUE
+5000
+10 - Next(int, int) Wiki Test 2
+stmt s;
+Select BOOLEAN such that Next(3, 4)
+TRUE
+5000
+11 - Next(int, int) Wiki Test 3
+stmt s;
+Select BOOLEAN such that Next(3, 7)
+TRUE
+5000
+12 - Next(int, int) Wiki Test 4
+stmt s;
+Select BOOLEAN such that Next(5, 6)
+TRUE
+5000
+13 - Next(int, int) Wiki Test 5
+stmt s;
+Select BOOLEAN such that Next(7, 9)
+TRUE
+5000
+14 - Next(int, int) Wiki Test 6
+stmt s;
+Select BOOLEAN such that Next(8, 10)
+TRUE
+5000
+14 - Next(int, int) Wiki Test 7
+stmt s;
+Select BOOLEAN such that Next(6, 4)
+FALSE
+5000
+15 - Next(int, int) Wiki Test 8
+stmt s;
+Select BOOLEAN such that Next(7, 10)
+FALSE
+5000
+16 - Next(int, int) Wiki Test 9
+stmt s;
+Select BOOLEAN such that Next(8, 9)
+FALSE
+5000
+
+
+

@@ -1,0 +1,60 @@
+@startuml
+
+class Optimizer {
+  - std::shared_ptr<Strategy> selectStrategy
+  - std::vector<std::shared_ptr<Strategy>> constraintStrategies
+  - std::vector<std::vector<std::shared_ptr<Strategy>>> groups
+  + std::shared_ptr<Strategy> getSelectStrategy()
+  + std::vector<std::vector<std::shared_ptr<Strategy>>> getGroups()
+  + void optimize(std::vector<std::shared_ptr<Strategy>>& strategies)
+  - void splitConstraintsFromSelect(
+          std::vector<std::shared_ptr<Strategy>>& strategies)
+  - void sortStrategiesInAllGroups()
+  - void reset()
+}
+
+class WithOptimizer {
+  + void optimizeWith(std::vector<std::shared_ptr<Strategy>>& strategies)
+  - std::unordered_map<std::string, std::pair<std::string, bool>> getReplaceableSynValues(
+        std::vector<std::shared_ptr<Strategy>>& strategies)
+  - std::unordered_map<std::string, SynonymType> getReplaceableStmtSyn(
+        std::vector<std::shared_ptr<Strategy>>& strategies)
+}
+
+class GroupDivider {
+  - std::unordered_map<std::string, std::vector<std::shared_ptr<Strategy>>> synonymGraph
+  + std::vector<std::vector<std::shared_ptr<Strategy>>> divide(
+        std::vector<std::shared_ptr<Strategy>>& strategies, std::vector<std::vector<std::shared_ptr<Strategy>>>& groups)
+  + void divideNextStrategy(std::unordered_set<std::shared_ptr<Strategy>>& visited,
+        std::vector<std::shared_ptr<Strategy>>& group, std::queue<std::shared_ptr<Strategy>>& queue)
+  - void buildSynonymGraph(std::vector<std::shared_ptr<Strategy>>& strategies)
+}
+
+class GroupSorter {
+  + void sort(std::unordered_set<std::string>& selectSynonyms,
+        std::vector<std::vector<std::shared_ptr<Strategy>>>& groups)
+  - bool isMorePrioritized(std::unordered_set<std::string>& selectSynonyms,
+        const std::vector<std::shared_ptr<Strategy>>& g1, const std::vector<std::shared_ptr<Strategy>>& g2)
+  - std::unordered_set<std::string> getGroupSynonyms(const std::vector<std::shared_ptr<Strategy>>& group)
+  - int countSelectSynonymInGroup(const std::unordered_set<std::string>& selectSynonyms,
+        const std::unordered_set<std::string>& group)
+}
+
+class StrategySorter {
+  - std::unordered_map<std::shared_ptr<Strategy>, std::vector<std::shared_ptr<Strategy>>> connectionGraph
+  + void sort(std::vector<std::shared_ptr<Strategy>>& group)
+  + void buildConnectionGraph(const std::vector<std::shared_ptr<Strategy>>& group)
+  + std::shared_ptr<Strategy> getFirstStrategy(const std::vector<std::shared_ptr<Strategy>>& group)
+  + bool isEasyToEvaluate(const std::shared_ptr<Strategy>& strategy1, const std::shared_ptr<Strategy>& strategy2)
+  + std::unordered_set<std::string> getIntersection(const std::shared_ptr<Strategy>& strategy1, const std::shared_ptr<Strategy>& strategy2)
+  + std::priority_queue<std::shared_ptr<Strategy>, std::vector<std::shared_ptr<Strategy>>,std::function<bool(
+        const std::shared_ptr<Strategy>& strategy1, const std::shared_ptr<Strategy>& strategy2)>> initializePriorityQueue(std::shared_ptr<Strategy>& firstStrategy)
+  + std::vector<std::shared_ptr<Strategy>> getSortStrategies(std::shared_ptr<Strategy>& firstStrategy)
+}
+
+Optimizer --> WithOptimizer
+Optimizer --> GroupDivider
+Optimizer --> GroupSorter
+Optimizer --> StrategySorter
+
+@enduml

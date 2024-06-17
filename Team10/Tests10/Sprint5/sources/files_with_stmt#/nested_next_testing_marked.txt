@@ -1,0 +1,33 @@
+procedure Second {
+    x = 1;                  #1
+    i = 2;                  #2
+    while (i!=3) {          #3
+        x = x + 4*y;        #4
+        call Third;         #5
+        print i;            #6
+        if (x==7) then {    #7
+            x = x+8;        #8
+        } else {
+            print z;        #9
+        }
+    }
+    if (x==10) then {       #10
+        x = x+11;           #11
+        while (i!=12) {     #12
+            x = x + 13*y;   #13
+            call Third;     #14
+            read i;         #15
+        }
+    } else {
+        print z;            #16
+        if (x==17) then {   #17
+            x = x+18;       #18
+        } else {
+            print z;        #19
+        }
+    }
+    z = z + x + i + 20;     #20
+    y = z + 21;             #21
+    x = x * y + z % 22;     #22
+    print twenty3;          #23
+}

@@ -1,0 +1,85 @@
+1 - Next(int, stmt)
+stmt s;
+Select s such that not Next(1, s)
+1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+5000
+2 - Next(while, int)
+while w;
+Select w such that not Next(w, 4)
+none
+5000
+3 - Next(_,call)
+call c;
+Select c such that not Next(_, c)
+none
+5000
+4 - Next(print, _)
+print p;
+Select p such that not Next(p, _)
+none
+5000
+5 - Next(print, assign)
+print p; assign a;
+Select p such that not Next(p, a)
+6, 9
+5000
+6 - Next(int, _)
+print p;
+Select BOOLEAN such that not Next(6, _)
+FALSE
+5000
+7 - Next(_, int)
+assign a;
+Select BOOLEAN such that not Next(_, 1)
+TRUE
+5000
+8 - Next(_, _)
+stmt s;
+Select BOOLEAN such that not Next(_, _)
+FALSE
+5000
+9 - Next(int, int) Wiki Test 1
+stmt s;
+Select BOOLEAN such that not Next(2, 3)
+FALSE
+5000
+10 - Next(int, int) Wiki Test 2
+stmt s;
+Select BOOLEAN such that not Next(3, 4)
+FALSE
+5000
+11 - Next(int, int) Wiki Test 3
+stmt s;
+Select BOOLEAN such that not Next(3, 7)
+FALSE
+5000
+12 - Next(int, int) Wiki Test 4
+stmt s;
+Select BOOLEAN such that not Next(5, 6)
+FALSE
+5000
+13 - Next(int, int) Wiki Test 5
+stmt s;
+Select BOOLEAN such that not Next(7, 9)
+FALSE
+5000
+14 - Next(int, int) Wiki Test 6
+stmt s;
+Select BOOLEAN such that not Next(8, 10)
+FALSE
+5000
+14 - Next(int, int) Wiki Test 7
+stmt s;
+Select BOOLEAN such that not Next(6, 4)
+TRUE
+5000
+15 - Next(int, int) Wiki Test 8
+stmt s;
+Select BOOLEAN such that not Next(7, 10)
+TRUE
+5000
+16 - Next(int, int) Wiki Test 9
+stmt s;
+Select BOOLEAN such that not Next(8, 9)
+TRUE
+5000

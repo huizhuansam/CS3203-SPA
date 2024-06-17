@@ -1,0 +1,424 @@
+procedure main {
+    alpha = main + main * (beta / 2 % 4) - gamma;
+    beta = alpha + main + main * (beta / 2 % 4) - gamma;
+    read beta;
+    print alpha;
+    gamma = beta - main + main * (alpha / 2 % 4) - gamma;
+    while ((initialCheck == 5) || (!(temp < 5))) {
+        print conditional;
+        read main;
+        call secondary;
+        if (tempIf > 1) then {
+            call gammaProc;
+            newA1 = delta - epsilon - zeta - base1;
+            call first;
+            print firstVar;
+            print initial;
+            print main;
+            if ((secondaryIf < tempIf) || (tempIf == 1)) then {
+                call deltaProc;
+                read delta;
+                delta = newA1 * epsilon + zeta / base1;
+            } else {
+                read epsilon;
+                call epsilonProc;
+                while (1 == 2) {
+                    epsilon = newA1 / newA2 / newA3 / base1 / base2;
+                    if (isFalse == isTrue) then {
+
+                        coordX1 = coordX1 + coordX2 - coordX3 % coordX4;
+                        read epsilon;
+                        print thirdVar;
+                        print thirdVarAlt;
+                        call alphaProc;
+                        print epsilon;
+                    } else {
+                        epsilon = epsilon + 1;
+                        main = epsilon + 1;
+                        while (isTrue == isTrue) {
+                            read alpha;
+                            print whileLoop;
+                            read beta;
+                            call secondary;
+                            read chi;
+                            chi = 1 + 13553 + 13554 + 13556 + 13558 + 135510 + 135524 + 135525 + 135536 + 135524 + 13553950 + 1355260548 + 13552048623 + 2053823058;
+                            read omega;
+
+                            varB3 = chi + omega - psi;
+                            if ((igk / igk) < (igk / igk)) then {
+                                read igk;
+                                print igk;
+                                igk = igk + omega + psi + 15 + 32 + 345 + 237 + 195 + 200 + 250;
+                            } else {
+                                igk = alpha + beta + gamma + delta + epsilon + zeta + eta + coordX1;
+                                call modifyABCDEProc;
+                                coordX3 = 1 + igk - 37 - 25 - 26 - 37 - 48 - 59 - 60 - 337 - 25 - 37 - 48 - 569 - 36 - 457 - 4 - 55 - 332 - 470 - 501 - 3 - 536;
+
+                                while (secondaryCond + fourthVar < initial - secondary) {
+                                    call first;
+                                    print initial;
+                                    read coordX1;
+                                    coordX2 = coordX1 / coordX2 / coordX3 * alpha * beta * gamma * newA1 + newA2 - varB3 + newA3;
+                                    if (lastConditional > lastConditional) then {
+                                        varB2 = num1 + alpha + psi + omega + coordX1 + varB2 + varB3;
+                                        varB3 = varB2 + num + coordX1 - coordX2 / coordX3 % coordX4;
+                                        read varB4;
+
+                                        read base1;
+                                        print varB4;
+                                        print main;
+
+                                        coordX3 = coordX1 + coordX2 + coordX3 + alpha;
+                                        call secondary;
+                                        coordX4 = epsilon + zeta + eta + theta + coordX4;
+                                        read coordX4;
+                                        print coordX4;
+                                        call iotaProc;
+                                        call kappaProc;
+                                        if (lastIf == lastIf) then {
+                                            print lastIf;
+                                        } else {
+                                            call modifyABCDEFGProc;
+                                            print modifyABCDEFGProc;
+                                            call etaProc;
+                                            print modifyABCDEProc;
+                                            call zetaProc;
+                                            while (lastWhile == lastWhile) {
+                                                call first;
+                                                print initial;
+                                                initial = coordX1 + alpha;
+                                                call secondary;
+                                                read coordX1;
+                                                print secondary;
+                                                secondary = coordX2 + beta;
+
+                                                print thirdVar;
+                                                thirdVar = coordX3 + psi;
+                                                print thirdVarAlt;
+                                                print conditional;
+                                                read newA1;
+                                                conditional = newA1 + newA2 + psi;
+                                                print whileLoop;
+                                                read newA2;
+                                                whileLoop = newA1 + newA2 + newA3;
+
+                                                print ifNested;
+                                                ifNested = ifNested + whileLoop + base1 + la + li;
+
+                                                print whileNested;
+
+                                                read alpha;
+                                                mix = mix + alpha + newA1 + beta;
+                                            }
+                                            coordX3 = coordX1 + coordX2 + coordX3 + alpha;
+                                            call secondary;
+                                            coordX4 = epsilon + zeta + eta + theta + coordX4;
+                                            read coordX4;
+                                            print coordX4;
+                                            call iotaProc;
+                                            call kappaProc;
+                                        }
+                                        call lambdaProc;
+                                        call alphaProc;
+                                        print coordX3;
+                                        call first;
+
+                                        coordX1 = num1 + alpha + psi + omega + coordX1 + varB2 + varB3;
+
+                                        source = coordX1 + varB2 + varB3 / varB4;
+                                        print source;
+                                        print mix;
+                                        read coordX1;
+
+                                    } else {
+
+                                        coordX1 = num1 + alpha + psi + omega + coordX1 + varB2 + varB3;
+                                        varB3 = coordX1 + coordX3 + varB2 * varB3;
+                                        read varB3;
+                                        main = varB3 + coordX1;
+                                    }
+
+                                    print source;
+
+                                    print firstVar;
+                                    coordX2 = coordX1 / coordX2 / coordX3 * alpha * beta * gamma * newA1 + newA2 - varB3 + newA3;
+
+                                }
+                                call nuProc;
+                                print nuProc;
+
+                                tempVar = coordX1 + coordX2 + secondary + secondaryCond - main % coordX4;
+                            }
+                            varB2 = varB3 / newA2 / newA3 / newA4 + alpha - beta;
+                            varB3 = varB3 / newA2 / newA3 / newA4 + alpha - beta;
+                            print secondary;
+                            print whileNestedProc;
+                            print varB3;
+                            varB4 = 1 + 3 + 4 + 6 + 8 + 10 + 24 + 25 + 36 + 24 + 3950 + 260548 + 2048623 + 2053823058;
+                        }
+                        main = alpha / 1 * gamma * newA3;
+                        if (isFalse == isFalse) then {
+                            call alphaProc;
+                            print initial;
+                            call betaProc;
+                            print base1;
+                            print base2;
+                            call gammaProc;
+                            while (whileLoop == whileLoop) {
+                                read alpha;
+                                print coordX4;
+                                read coordX4;
+                                if (conditional > conditional) then {
+                                    varB3 = newA1 / newA2 * newA3 % newA4 + alpha + beta - epsilon - zeta + coordX4 + coordX3;
+                                    read varB3;
+                                    print varB3;
+                                } else {
+                                    epsilon = 225 / 26 / 235 / 263;
+                                    call modifyEProc;
+                                    varB3 = newA1 / newA2 * newA3 % newA4 + alpha + beta - epsilon - zeta + coordX4 + coordX3;
+
+                                }
+                                print secondary;
+                                call deltaProc;
+                                read zeta;
+                                varB3 = newA1 / newA2 * newA3 % newA4 + alpha + beta - epsilon - zeta + coordX4 + coordX3;
+                                read alpha;
+                            }
+                            alpha = alpha + beta + gamma + delta + epsilon;
+                            read beta;
+                            print mix;
+                            read gamma;
+                        } else {
+                            call modifyABCDEFGProc;
+                            call epsilonProc;
+                            read zeta;
+                            print source;
+                            call zetaProc;
+                            while (true == true) {
+                                epsilon = epsilon + alpha + beta;
+                                call zetaProc;
+                                read zeta;
+                            }
+                            epsilon = epsilon + alpha + beta;
+                            call zetaProc;
+                            read zeta;
+                        }
+                        varB2 = epsilon / varB2 + varB3;
+                        print varB2;
+                        call modifyABCDEFGProc;
+                        print modifyABCDEProc;
+                    }
+                    call modifyABCDEProc;
+                    epsilon = epsilon * alpha * beta * gamma + delta + epsilon / coordX1 / coordX2 / coordX3;
+                    call modifyABCDEFGProc;
+                }
+                delta = newA1 + epsilon / zeta + base1;
+                call zetaProc;
+                call zetaProc;
+                print secondaryCond;
+                print fourthVar;
+                read newA1;
+                epsilon = epsilon + 123;
+                delta = newA1 + epsilon / zeta + base1;
+            }
+        } else {
+            call alphaProc;
+            call betaProc;
+            newA1 = alpha + beta + gamma;
+            print alpha;
+            while (newA1 > alpha + beta + gamma) {
+                if (secondIf > firstIf) then {
+                    newA2 = newA1 + base1 + gamma + delta;
+                    call thetaProc;
+                    read theta;
+                } else {
+                    call iotaProc;
+                    print iotaProc;
+                    call modifyABCDEFGProc;
+                    print modifyEProc;
+                }
+                varB2 = newA2 - epsilon + zeta % eta;
+                print newA3;
+                read newA3;
+                if (newA3 < 0) then {
+                    read newA3;
+                    call lambdaProc;
+                } else {
+                    newA3 = newA3 % newA1 / newA2;
+                    print newA3;
+                    call kappaProc;
+                }
+                while (igk == igk) {
+                    chi = chi * 121;
+                    print igk;
+                    igk = igk + alpha + beta + gamma + delta;
+
+
+                    igk = chi + chi / chi % chi;
+                    call muProc;
+                }
+            }
+            call nuProc;
+            print modifyEProc;
+            call modifyEProc;
+            newA3 = (varB2 - newA2) / newA1;
+            newA4 = varB2 + varB3;
+        }
+        print base1;
+        read base1;
+
+        base1 = newA1 + gamma + delta + epsilon;
+        print secondaryCond;
+    }
+    print main;
+    print chi;
+    call first;
+    end = 3203;
+    end = end / end;
+    print finallyItsTheEnd;
+}
+
+procedure first {
+    beta = 1;
+    alpha = alpha + beta + gamma;
+    read alpha;
+    beta = beta + gamma;
+    while (1 == 1) {
+        beta = beta + delta;
+        epsilon = gamma;
+        if (1 == 1) then {
+            while (1 == 1) {
+                call modifyABCDEProc;
+                gamma = delta;
+            }
+        } else {
+            gamma = 1;
+            call modifyABCDEProc;
+        }
+        delta = gamma + delta + epsilon;
+    }
+    alpha = alpha + beta + gamma + delta + epsilon;
+}
+
+procedure secondary {
+    call first;
+    zeta = alpha;
+    if (1 == 1) then {
+        call modifyABCDEFGProc;
+    } else {
+        zeta = alpha;
+    }
+    alpha = zeta;
+    while (1 == 1) {
+        epsilon = epsilon + alpha + zeta + eta;
+        call modifyEProc;
+        eta = eta * 1;
+    }
+    alpha = alpha + beta + gamma + delta + epsilon + zeta + eta;
+}
+
+procedure modifyABCDEProc {
+    alpha = 1;
+    if (alpha == 1) then {
+        beta = 1;
+        while (alpha == 1) {
+            while (alpha == 1) {
+                if (alpha == 1) then {
+                    read gamma;
+                } else {
+                    call modifyEProc;
+                }
+            }
+        }
+    } else {
+        delta = 1;
+    }
+}
+
+procedure modifyEProc {
+    read epsilon;
+    while (1 == 1) {
+        epsilon = main + main * (alpha / 2 % 4) - epsilon;
+    }
+    if ((epsilon > 1 % epsilon + 2 / 3 * 4) && (epsilon > (1 % epsilon) + (2 / 3) * 4)) then {
+        epsilon = main + (main * (alpha / (2 % 4))) - epsilon;
+    } else {
+        epsilon = main + (main * ((alpha / 2) % 4)) - epsilon;
+    }
+    epsilon = (main + main) * (alpha / 2 % 4) - epsilon;
+    print epsilon;
+}
+
+procedure modifyABCDEFGProc {
+    call modifyABCDEProc;
+    read zeta;
+    while (1 == 1) {
+        if (1 == 1) then {
+            print eta;
+            read eta;
+        } else {
+            call modifyABCDEProc;
+            eta = 1;
+        }
+    }
+    zeta = zeta + alpha + beta + gamma + delta + epsilon;
+}
+
+procedure alphaProc {
+    call betaProc;
+    call epsilonProc;
+}
+
+procedure betaProc {
+    call gammaProc;
+    call epsilonProc;
+}
+
+procedure gammaProc {
+    call deltaProc;
+}
+
+procedure deltaProc {
+    print delta;
+    read delta;
+}
+
+procedure epsilonProc {
+    call deltaProc;
+}
+
+procedure zetaProc {
+    call deltaProc;
+    call iotaProc;
+}
+
+procedure etaProc {
+    call deltaProc;
+}
+
+procedure thetaProc {
+    call zetaProc;
+}
+
+procedure iotaProc {
+    print iotaProc;
+    read iotaProc;
+}
+
+procedure kappaProc {
+    call lambdaProc;
+}
+
+procedure lambdaProc {
+    call alphaProc;
+}
+
+procedure muProc {
+    call lambdaProc;
+    call alphaProc;
+}
+
+procedure nuProc {
+    call kappaProc;
+    call lambdaProc;
+}

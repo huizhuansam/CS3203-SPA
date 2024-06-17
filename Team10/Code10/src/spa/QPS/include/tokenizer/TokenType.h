@@ -1,0 +1,25 @@
+#pragma once
+
+namespace QPS {
+enum class TokenType {
+  NAME,
+  INTEGER,
+  SEMICOLON,
+  OPEN_BRACKET,
+  CLOSE_BRACKET,
+  OPEN_ANGLE_BRACKET,
+  CLOSE_ANGLE_BRACKET,
+  PERIOD,
+  ATTR_NAME,
+  COMMA,
+  PLUS,
+  MINUS,
+  TIMES,
+  DIV,
+  MOD,
+  EQ,
+  DOUBLE_QUOTE,
+  WILDCARD,
+  WHITESPACE,
+};
+}  // namespace QPS

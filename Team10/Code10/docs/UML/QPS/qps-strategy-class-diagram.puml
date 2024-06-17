@@ -1,0 +1,322 @@
+@startuml
+
+class Strategy {
+  - bool isNot
+  - int priorityScore
+  # EvaluateFunctionType evaluateProcedure
+  # EvaluateFunctionType evaluateCall
+  # EvaluateFunctionType evaluateVariable
+  # EvaluateFunctionType evaluateRead
+  # EvaluateFunctionType evaluatePrint
+  # EvaluateFunctionType evaluateConstant
+  # EvaluateFunctionType evaluateStmt
+  # EvaluateFunctionType evaluateAssign
+  # EvaluateFunctionType evaluateWhile
+  # EvaluateFunctionType evaluateIf
+  # std::shared_ptr<Cache> cache
+
+  # std::vector<std::string> getAllHeaderNames(const std::string& synonym,
+                                                    SynonymType synonymType)
+  # std::unordered_set<int> getAllStmtBySynonymType(
+      StmtRefType type, ReadFacade& readFacade)
+  # void setPriorityScore(int score)
+  + Result evaluateValues(ReadFacade& readFacade)
+  + bool evaluateBoolean(ReadFacade& readFacade)
+  + bool isSelectStrategy()
+  + bool isSelectTupleStrategy()
+  + bool isSelectBooleanStrategy()
+  + bool isBooleanStrategy()
+  + int getSynonymCount()
+  + std::unordered_set<std::string> getSynonyms()
+  + int getPriorityScore()
+  + void setIsNotStrategy()
+  + bool isNotStrategy()
+  + void injectCache(const std::shared_ptr<Cache>& cacheObject)
+}
+
+class BooleanSelectStrategy extends Strategy {
+  + bool isSelectBooleanStrategy()
+  + bool isBooleanStrategy()
+  + bool evaluateBoolean(ReadFacade& readFacade)
+}
+
+
+class TupleSelectStrategy extends Strategy {
+  - std::vector<std::string> synonyms
+  - std::vector<SynonymType> synonymTypes
+  - std::vector<AttrNameType> attrNameTypes
+  + bool isSelectTupleStrategy()
+  + Result evaluateValues(ReadFacade& readFacade)
+  + std::vector<std::string> getTargets()
+  + std::vector<std::string> getTupleSynonyms()
+  + std::vector<SynonymType> getSynonymTypes()
+  + std::vector<AttrNameType> getAttrNameTypes()
+  - void getTupleResult(const std::vector<Result>& results,
+                             Result& current)
+}
+
+class EntEntArgStrategy extends Strategy {
+  - StrategyType strategyType
+  - std::string arg1
+  - EntRefType argType1
+  - std::string arg2
+  - EntRefType argType2
+  - std::unordered_map<StrategyType, ReadFacadeStrMethod>
+      strategyToReadFacadeMethodMap
+  - bool isArg1Synonym
+  - bool isArg1Ident
+  - bool isArg2Synonym
+  - bool isArg2Ident
+  - bool isArg2Wildcard
+  - std::unordered_set<std::string> argSet1
+  - std::unordered_set<std::string> argSet2
+  - std::unordered_map<std::string, std::unordered_set<std::string>> relationMap
+  - void setArgFlags()
+  - void setEvaluationSets(ReadFacade &readFacade)
+  - std::unordered_map<std::string, int> generateHeaders()
+  - std::vector<std::string> generateDataRow(const std::string &arg1Value,
+                                           std::string &arg2Value)
+  + std::string getArg1()
+  + EntRefType getArgType1()
+  + std::string getArg2()
+  + EntRefType getArgType2()
+  + std::unordered_set<std::string> getSynonyms()
+  + bool isBooleanStrategy()
+  + Result evaluateValues(ReadFacade &readFacade)
+  + bool evaluateBoolean(ReadFacade &readFacade)
+}
+
+class StmtEntArgStrategy extends Strategy {
+  - StrategyType strategyType
+  - std::string arg1
+  - StmtRefType argType1
+  - std::string arg2
+  - EntRefType argType2
+  - std::unordered_map<StrategyType, ReadFacadeStrMethod>
+      strategyToReadFacadeMethodMap
+  - bool isArg1Synonym
+  - bool isArg1Integer
+  - bool isArg2Synonym
+  - bool isArg2Ident
+  - bool isArg2Wildcard
+  - std::unordered_set<int> argSet1
+  - std::unordered_set<std::string> argSet2
+  - std::unordered_map<int, std::unordered_set<std::string>> relationMap
+  - void setArgFlags()
+  - void setEvaluationSets(ReadFacade &readFacade)
+  - std::unordered_map<std::string, int> generateHeaders()
+  - std::vector<std::string> generateDataRow(int stmtNo, std::string &var)
+  + std::string getArg1()
+  + StmtRefType getArgType1()
+  + std::string getArg2()
+  + EntRefType getArgType2()
+  + std::unordered_set<std::string> getSynonyms()
+  + bool isBooleanStrategy()
+  + Result evaluateValues(ReadFacade &readFacade)
+  + bool evaluateBoolean(ReadFacade &readFacade)
+}
+
+class StmtStmtArgStrategy extends Strategy {
+  - StrategyType strategyType
+  - std::string arg1
+  - StmtRefType argType1
+  - std::string arg2
+  - StmtRefType argType2
+  - std::unordered_map<StrategyType, ReadFacadeStrMethod>
+      strategyToReadFacadeMethodMap
+  - bool isArg1Synonym
+  - bool isArg1Stmt
+  - bool isArg1Assign
+  - bool isArg1Integer
+  - bool isArg1Integer
+  - bool isArg1Wildcard
+  - bool isArg2Synonym
+  - bool isArg2Stmt
+  - bool isArg2Assign
+  - bool isArg2Integer
+  - bool isArg2Integer
+  - bool isArg2Wildcard
+  - bool isBothArgSame
+  - std::unordered_set<int> argSet1
+  - std::unordered_set<std::string> argSet2
+  - std::unordered_map<std::string, std::unordered_set<std::string>> relationMap
+  - void setArgFlags()
+  - void setEvaluationSets(ReadFacade &readFacade)
+  - std::unordered_map<std::string, int> generateHeaders()
+  - std::vector<std::string> generateDataRow(int stmt1, int stmt2)
+  + std::string getArg1()
+  + StmtRefType getArgType1()
+  + std::string getArg2()
+  + StmtRefType getArgType2()
+  + std::unordered_set<std::string> getSynonyms()
+  + bool isBooleanStrategy()
+  + Result evaluateValues(ReadFacade &readFacade)
+  + bool evaluateBoolean(ReadFacade &readFacade)
+}
+
+class PatternStrategy extends Strategy {
+  - std::unordered_map<StrategyType, ReadFacadeReturnPairMethod>
+      strategyToReadFacadeMethodMap
+  - StrategyType strategyType
+  - std::string synonym
+  - std::string arg1
+  - EntRefType argType1
+  - std::vector<std::string> arg2
+  - ExprSpecType argType2
+  - bool isAssignPattern
+  - bool isWhilePattern
+  - bool isIfPattern
+  - bool isArg1Synonym
+  - bool isArg1Variable
+  - bool isArg1Ident
+  - bool isArg1Wildcard
+  - bool isExpr
+  - bool isPartialExpr
+  - void setArgFlags()
+  - std::unordered_set<std::pair<std::string, std::string>, PairHash> getStmtVarPairSet(ReadFacade& readFacade)
+  - std::unordered_map<std::string, int> generateHeaders()
+  - std::vector<std::string> generateDataRow(std::string& stmtNo, std::string& var)
+  + std::string getSynonym()
+  + std::string getArg1()
+  + std::vector<std::string> getArg2()
+  + EntRefType getArgType1()
+  + ExprSpecType getArgType2()
+  + std::unordered_set<std::string> getSynonyms()
+  + Result evaluateValues(ReadFacade& readFacade)
+}
+
+class WithStrategy extends Strategy {
+  - std::string arg1
+  - RefType argType1
+  - std::string arg2
+  - RefType argType2
+  - Result getResultOfOneSide(bool isLHS, ReadFacade& readFacade)
+  - std::string getHeaderWithAttrName(const std::string& synonym,
+                                           RefType refType)
+  + std::string getArg1()
+  + std::string getArg2()
+  + RefType getArgType1()
+  + RefType getArgType2()
+  + std::unordered_set<std::string> getSynonyms()
+  + bool isBooleanStrategy()
+  + Result evaluateValues(ReadFacade& readFacade)
+  + bool evaluateBoolean(ReadFacade& readFacade)
+}
+
+enum SynonymType {
+  STMT,
+  READ,
+  PRINT,
+  CALL,
+  WHILE,
+  IF,
+  ASSIGN,
+  VARIABLE,
+  CONSTANT,
+  PROCEDURE,
+  INVALID
+}
+
+enum AttrNameType {
+  NAME,
+  INTEGER,
+  NONE
+}
+
+enum StrategyType {
+  FOLLOWS,
+  FOLLOWS_T,
+  PARENT,
+  PARENT_T,
+  NEXT,
+  NEXT_T,
+  AFFECTS,
+  MODIFIES_P,
+  USES_P,
+  CALLS,
+  CALLS_T,
+  MODIFIES_S,
+  USES_S,
+  ASSIGN_PATTERN,
+  WHILE_PATTERN,
+  IF_PATTERN
+}
+
+enum StmtRefType {
+  STMT,
+  READ,
+  PRINT,
+  CALL,
+  WHILE,
+  IF,
+  ASSIGN,
+  VARIABLE,
+  CONSTANT,
+  PROCEDURE,
+  WILDCARD,
+  INTEGER,
+  INVALID
+}
+
+enum EntRefType {
+  STMT,
+  READ,
+  PRINT,
+  CALL,
+  WHILE,
+  IF,
+  ASSIGN,
+  VARIABLE,
+  CONSTANT,
+  PROCEDURE,
+  WILDCARD,
+  IDENT,
+  INVALID
+}
+
+enum ExprSpecType {
+  EXPR,
+  WILDCARD,
+  WILDCARD_EXPR,
+  INVALID
+}
+
+enum RefType {
+  IDENT,
+  INTEGER,
+  PROCEDURE_PROCNAME,
+  CALL_PROCNAME,
+  VARIABLE_VARNAME,
+  READ_VARNAME,
+  PRINT_VARNAME,
+  CONSTANT_VALUE,
+  STMT_STMTNO,
+  READ_STMTNO,
+  PRINT_STMTNO,
+  CALL_STMTNO,
+  WHILE_STMTNO,
+  IF_STMTNO,
+  ASSIGN_STMTNO,
+  NONE
+}
+
+TupleSelectStrategy *-down- SynonymType
+TupleSelectStrategy *-down- AttrNameType
+
+EntEntArgStrategy *-down- StrategyType
+StmtStmtArgStrategy *-down- StrategyType
+StmtEntArgStrategy *-down- StrategyType
+PatternStrategy *-down- StrategyType
+
+StmtStmtArgStrategy *-down- StmtRefType
+StmtEntArgStrategy *-down- StmtRefType
+
+EntEntArgStrategy *-down- EntRefType
+StmtEntArgStrategy *-down- EntRefType
+PatternStrategy *-down- EntRefType
+
+PatternStrategy *-down- ExprSpecType
+
+WithStrategy *-down- RefType
+
+@enduml
